@@ -1,0 +1,14 @@
+#pragma once
+
+enum BaseState{
+	OPEN,
+	CLOSED
+};
+
+class Base{
+private:
+	BaseState state = CLOSED;
+
+public
+
+};

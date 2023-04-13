@@ -1,0 +1,4 @@
+#include "Mini-STLIB/Stream.hpp"
+
+vector<Stream*> Stream::streams;
+unsigned int Stream::current_id = 0b1000000;

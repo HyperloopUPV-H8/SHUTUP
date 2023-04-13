@@ -1,0 +1,51 @@
+#pragma once
+
+#include "stm32h7xx_hal.h"
+#include <functional>
+#include <vector>
+
+using namespace std;
+
+// TODO -> move this out
+
+template<uint16_t id, typename... args>
+class Order{
+
+public:
+    uint8_t* current_data;
+    size_t sizes[sizeof...(args)] = { sizeof(args)... };
+    function<void()> callback;
+    Order() { }
+
+    template<typename T>
+    T get_arg(int index) {
+        int position = 0;
+        for(int i = 0; i < index; i++)
+            position += sizes[i];
+        return *((T*) current_data + position);
+    }
+
+    void set_callback(function<void()> callback){
+        this -> callback = callback;
+    }
+
+};
+
+//// CAN SERVICE
+
+class Can {
+
+private:
+	static const uint32_t MAX_MESSAGE_SIZE = 16;
+	FDCAN_TxHeaderTypeDef   TxHeader;
+	uint8_t               	TxData[8];
+	uint32_t              	TxMailbox;
+
+	FDCAN_HandleTypeDef* hdcan;
+	static vector<Can*> all_cans;
+
+public:
+	void send_message(uint16_t id, uint8_t* data, uint32_t DLC);
+	Can(FDCAN_HandleTypeDef* hdcan);
+	static void start_all_cans();
+};

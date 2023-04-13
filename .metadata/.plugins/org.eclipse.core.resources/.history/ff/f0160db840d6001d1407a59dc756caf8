@@ -1,0 +1,19 @@
+#pragma once
+
+#include "Mini-STLIB/DataStructures/RingBuffer.hpp"
+#include <stdint.h>
+
+template<uint32_t BUFFER_SIZE, class BUFFER_TYPE>
+class MovingAverage{
+private:
+	RingBuffer<BUFFER_SIZE, BUFFER_TYPE> ring;
+
+public:
+	double current_value;
+	double add_value(BUFFER_TYPE value){
+		BUFFER_TYPE old_value = ring.add_new_value(value);
+		current_value -= ((double) old_value) / BUFFER_SIZE;
+		current_value += ((double) value) / BUFFER_SIZE;
+		return current_value;
+	}
+};

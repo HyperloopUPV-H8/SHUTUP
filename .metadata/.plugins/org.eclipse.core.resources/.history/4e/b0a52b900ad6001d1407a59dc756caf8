@@ -1,0 +1,3 @@
+#include "Mini-STLIB/Timer.hpp"
+
+vector<TIM_HandleTypeDef*> Timer::all_timers;

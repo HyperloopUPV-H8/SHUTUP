@@ -1,0 +1,7 @@
+#include "Mini-STLIB/Can.hpp"
+
+Can::Can(FDCAN_HandleTypeDef* hdcan) : hdcan(hdcan){
+
+}
+
+vector<Can*> Can::all_cans;

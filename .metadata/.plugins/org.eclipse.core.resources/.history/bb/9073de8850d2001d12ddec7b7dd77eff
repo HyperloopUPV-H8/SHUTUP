@@ -1,0 +1,11 @@
+#pragma once
+
+RingBuffer<MovingAverage::BUFFER_SIZE, MovingAverage::BUFFER_TYPE> MovingAverage::ring;
+double MovingAverage::current_value;
+
+double MovingAverage::add_value(BUFFER_TYPE value){
+	BUFFER_TYPE old_value = ring.add_new_value(value);
+	current_value -= ((double) old_value) / BUFFER_SIZE;
+	current_value += ((double) value) / BUFFER_SIZE;
+	return current_value;
+}

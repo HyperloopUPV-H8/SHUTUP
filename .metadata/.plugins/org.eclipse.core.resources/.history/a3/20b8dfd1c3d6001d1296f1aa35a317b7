@@ -1,0 +1,33 @@
+#pragma once
+
+#include "stm32h7xx_hal.h"
+#include <vector>
+
+using namespace std;
+
+class Packet{
+private:
+
+public:
+	enum Destiny {
+		TUD_A		= 0b01,
+		TUD_B		= 0b10
+		TEST_CLIENT = 0b11,
+
+	};
+
+	Packet(Destiny ){
+
+	}
+};
+
+class Can {
+private:
+	FDCAN_HandleTypeDef* hdcan;
+	static vector<Can*> all_cans;
+
+public:
+	void send_message();
+	Can(FDCAN_HandleTypeDef* hdcan);
+	static void start_all_cans();
+};

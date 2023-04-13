@@ -1,0 +1,3 @@
+#include "Mini-STLIB/AnalogOut.hpp"
+
+vector<AnalogOut*> AnalogOut::all_analog_outs;

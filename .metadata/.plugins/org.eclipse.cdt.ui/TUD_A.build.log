@@ -1,0 +1,10 @@
+01:56:14 **** Incremental Build of configuration Debug for project TUD_A ****
+make -j12 all 
+arm-none-eabi-size   TUD_A.elf 
+   text	   data	    bss	    dec	    hex	filename
+  38660	    140	   3008	  41808	   a350	TUD_A.elf
+Finished building: default.size.stdout
+ 
+
+01:56:15 Build Finished. 0 errors, 0 warnings. (took 430ms)
+

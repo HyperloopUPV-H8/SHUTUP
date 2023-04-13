@@ -1,0 +1,28 @@
+#pragma once
+
+#include "Models/Pin.hpp"
+#include "stm32h7xx_hal.h"
+#include <vector>
+#include <map>
+
+using namespace std;
+
+class DigitalOut {
+
+public:
+	enum DigitalOutState {
+		HIGH,
+		LOW
+	};
+
+private:
+	DigitalOutState state = DigitalOut::LOW;
+	Pin* pin;
+
+public:
+	static vector<DigitalOut*> all_digital_outs;
+	static map<Pin*, DigitalOut*> pin_to_digital_out;
+	DigitalOut(Pin* pin);
+	void turn_high();
+	void turn_low();
+};

@@ -1,0 +1,22 @@
+#pragma once
+
+#include <vector>
+
+class Stream {
+private:
+	static vector<Stream> streams;
+	uint32_t frequency;
+	size_t size;
+
+public:
+
+	Stream() {
+		Stream::streams.push_back(this);
+	}
+
+	template<typename T>
+	static void add_stream(uint16_t frequency, T* data) {
+
+	}
+
+};

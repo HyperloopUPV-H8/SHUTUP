@@ -1,0 +1,84 @@
+#pragma once
+
+#include <functional>
+#include <stdint.h>
+#include <vector>
+#include <map>
+
+using namespace std;
+
+template<typename... T>
+class Field;
+
+template<>
+class Field<> {
+    public:
+    virtual void parse(uint8_t* ptr) = 0;
+    virtual void unparse(uint8_t* ptr) = 0;
+    virtual size_t get_size() = 0;
+};
+
+template<typename T>
+class Field<T> : public Field<>{
+    public:
+    T* ptr;
+    Field(T* ptr) : ptr(ptr) { }
+    void parse(uint8_t* d)   { *this->ptr   = *((T*) d); }
+    void unparse(uint8_t* d) { *((T*) d) = *this->ptr; }
+    size_t get_size() { return sizeof(T); }
+};
+
+class Packet {
+    private:
+    static map<uint16_t, Packet*> all_packets;
+
+    public:
+    size_t size = 0;
+    uint16_t id;
+    vector<Field<>*> fields;
+    void (&callback)() = nullptr;
+
+    template<typename... T>
+    Packet(uint16_t id, void (&callback)(), T*... fields) : id(id), callback(callback) {
+        build(fields...);
+        Packet::all_packets[id] = this;
+    }
+
+    Packet(uint16_t id) : id(id) { }
+
+    template<typename Arg1, typename... Rest>
+    void build(Arg1* arg1, Rest*... rest) {
+    	size += sizeof(Arg1);
+        Field<Arg1>* field = new Field<Arg1>(arg1);
+        fields.push_back(((Field<>*) field));
+        if constexpr(sizeof...(rest) == 0)
+            return;
+        else
+            build(rest...);
+    }
+
+    void parse(uint8_t* ptr){
+        uint8_t* ptr_temp = ptr;
+        for(auto field : fields){
+            field -> parse(ptr_temp);
+            ptr_temp += field->get_size();
+        }
+    }
+
+    void unparse(uint8_t* ptr){
+        uint8_t* ptr_temp = ptr;
+        for(auto field : fields){
+            field -> unparse(ptr_temp);
+            ptr_temp += field->get_size();
+        }
+    }
+
+    static void process_packet(uint16_t id, uint8_t* data) {
+        for(auto& entry : all_packets){
+        	if(entry.second -> id == id){
+                entry.second->parse(data);
+                entry.second->callback();
+        	}
+        }
+    }
+};

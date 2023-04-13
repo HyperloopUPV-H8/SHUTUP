@@ -1,0 +1,17 @@
+#pragma once
+
+#include "stm32h7xx_hal.h"
+#include <vector>
+
+using namespace std;
+
+class Can {
+private:
+	FDCAN_HandleTypeDef* hdcan;
+	static vector<Can*> all_cans;
+
+public:
+	void send_message();
+	Can(FDCAN_HandleTypeDef* hdcan);
+	static void start_all_cans();
+};

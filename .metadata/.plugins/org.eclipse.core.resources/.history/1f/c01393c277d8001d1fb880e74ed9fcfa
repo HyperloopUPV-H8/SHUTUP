@@ -1,0 +1,123 @@
+#pragma once
+
+#include "Timer.hpp"
+#include "Can.hpp"
+#include "Models/Pin.hpp"
+#include "AnalogIn.hpp"
+#include "InputCapture.hpp"
+#include "DigitalIn.hpp"
+#include <optional>
+#include <vector>
+#include <map>
+
+using namespace std;
+
+enum State{
+	FREE,
+	OCCUPIED
+};
+
+class StreamMessage{
+public:
+	static unsigned int message_index;
+	unsigned int id;
+	size_t total_size = 0;
+	vector<size_t> sizes;
+	vector<void*> ptrs;
+
+	template<typename Arg1, typename... Rest>
+	StreamMessage(Arg1* arg1, Rest*... args){
+		total_size += sizeof(Arg1);
+		sizes.push_back(sizeof(Arg1));
+		ptrs.push_back(arg1);
+		if(sizeof...(args) == 0){
+			message_index += 1;
+			id = message_index;
+			return;
+		}else{
+			StreamMessage(args...);
+		}
+	}
+
+	StreamMessage(){}
+
+	void unparse(uint8_t* d){
+		for(int i = 0; i < sizes.size(); i++){
+			memcpy(d, ptrs[i], sizes[i]);
+			d+= sizes[i];
+		}
+	}
+
+	// TODO -> abstract all Read services
+
+	static StreamMessage* FromAnalogIn(AnalogIn* in){
+		return new StreamMessage(&in->voltage);
+	}
+
+	static StreamMessage* FromDigigalIn(DigitalIn* in){
+		return new StreamMessage(&in->state);
+	}
+
+	static StreamMessage* FromInputCapture(InputCapture* in){
+		return new StreamMessage(&in->frequency, &in->duty);
+	}
+
+	static optional<StreamMessage*> FromPin(Pin* pin){
+		if(pin->mode == ANALOG_INPUT)
+			return FromAnalogIn(AnalogIn::analog_in_from_pin[pin]);
+		if(pin->mode == DIGITAL_INPUT)
+			return FromDigigalIn(DigitalIn::pin_to_digital_in[pin]);
+		if(pin->mode == INPUT_CAPTURE)
+			return FromInputCapture(InputCapture::pin_to_input_capture[pin]);
+	}
+};
+
+class Stream {
+private:
+	static vector<Stream*> streams;
+	static int index;
+	vector<StreamMessage*> messages;
+	Timer* timer;
+	Can* can;
+
+public:
+	State state = FREE;
+	uint32_t frequency;
+
+	Stream(Timer* timer, Can* can) : timer(timer), can(can) {
+		Stream::streams.push_back(this);
+	}
+
+	void send_all_messages(){
+		Stream::index ++;
+		for(int i = 0; i < messages.size(); i++){
+			StreamMessage message = messages[i];
+			uint8_t d[message.total_size];
+			//message.unparse(d);
+			for(int i = 0; i < message.total_size; i++)
+				d[i] = 0b10101010;
+			can->send_message(message.id, d, message.total_size);
+		}
+	}
+
+	void add_message(uint32_t frequency, StreamMessage* message){
+		messages.push_back(message);
+		if(state == FREE){
+			state = OCCUPIED;
+			timer->execute_at([&](){ send_all_messages(); }, frequency);
+		};
+		this -> frequency = frequency;
+		can->send_message(READ_STREAM_ID, (uint8_t*) &message->id, sizeof(message->id));
+	}
+
+	static void add_stream(uint32_t frequency, Pin* pin) {
+		for(auto s : streams){
+			if(s->state == FREE || frequency == s->frequency){
+				StreamMessage* message = StreamMessage::FromPin(pin).value();
+				s->add_message(frequency, message);
+				return;
+			}
+		}
+	}
+
+};

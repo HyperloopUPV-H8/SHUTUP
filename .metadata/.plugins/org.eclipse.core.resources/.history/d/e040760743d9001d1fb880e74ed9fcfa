@@ -1,0 +1,44 @@
+#pragma once
+
+#include "Models/Packet.hpp"
+#include "stm32h7xx_hal.h"
+#include <functional>
+#include <optional>
+#include <utility>
+#include <vector>
+#include <map>
+
+using namespace std;
+
+// CAN SERVICE
+
+struct DLC {
+	uint32_t size;
+	uint32_t code;
+};
+
+class Can {
+private:
+	static const vector<DLC> DLCS;
+	static const uint32_t MAX_MESSAGE_SIZE = 16;
+
+	FDCAN_HandleTypeDef* hdcan;
+	FDCAN_TxHeaderTypeDef   TxHeader;
+	uint8_t               	TxData[MAX_MESSAGE_SIZE];
+	FDCAN_RxHeaderTypeDef   RxHeader;
+	uint8_t               	RxData[MAX_MESSAGE_SIZE];
+
+	static vector<Can*> all_cans;
+
+	void start();
+	void message_received(uint32_t RxFifo0ITs);
+	optional<uint32_t> get_dlc_from_size(uint32_t size);
+
+public:
+	void send_packet(Packet* packet);
+	void send_message(uint16_t id, uint8_t* data, uint32_t DLC);
+	void send_message(uint16_t id, uint32_t DLC);
+	Can(FDCAN_HandleTypeDef* hdcan);
+	static void message_received_all_cans(FDCAN_HandleTypeDef* hfdcan, uint32_t RxFifo0ITs);
+	static void start_all_cans();
+};

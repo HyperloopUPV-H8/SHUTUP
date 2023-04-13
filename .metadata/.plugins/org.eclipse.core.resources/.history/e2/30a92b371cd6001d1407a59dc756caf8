@@ -1,0 +1,4 @@
+#include "Mini-STLIB/Timer.hpp"
+
+vector<Timer*> Timer::all_timers;
+uint32_t Timer::INDEX_WEIRD = 0;

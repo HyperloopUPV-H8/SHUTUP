@@ -1,0 +1,15 @@
+
+#include <Mini-STLIB/DigitalIn.hpp>
+
+vector<DigitalIn*> DigitalIn::all_digital_ins;
+
+DigitalIn::DigitalIn(GPIO_TypeDef* port, uint16_t pin) : port(port), pin(pin) {
+	DigitalIn::all_digital_ins.push_back(this);
+}
+
+DigitalIn::DigitalInState DigitalIn::get_value(){
+	GPIO_PinState state = HAL_GPIO_ReadPin(port, pin);
+	if(state == GPIO_PIN_SET)
+		return DigitalIn::HIGH;
+	return DigitalIn::LOW;
+}

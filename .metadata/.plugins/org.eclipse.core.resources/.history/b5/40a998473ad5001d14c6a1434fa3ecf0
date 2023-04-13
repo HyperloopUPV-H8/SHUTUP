@@ -1,0 +1,18 @@
+
+#include "Mini-STLIB/Base.hpp"
+
+BaseState Base::state = CLOSED;
+
+static vector<Base*> Base::all_bases;
+
+Base::Base(GPIO_TypeDef* port, uint16_t pin) : port(port), pin(pin) {
+	Base::all_bases.push_back(this);
+}
+
+void Base::open(){
+	HAL_GPIO_WritePin(port, pin, GPIO_PIN_SET);
+}
+
+void Base::close(){
+	HAL_GPIO_WritePin(port, pin, GPIO_PIN_RESET);
+}

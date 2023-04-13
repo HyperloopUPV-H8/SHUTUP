@@ -1,0 +1,19 @@
+#include "Mini-STLIB/Can.hpp"
+
+Can::Can(FDCAN_HandleTypeDef* hdcan) : hdcan(hdcan) {
+	Can::all_cans.push_back(this);
+}
+
+void Can::start_all_cans() {
+	for(auto can : Can::all_cans)
+		HAL_FDCAN_Start(can->hdcan);
+}
+
+void Can::send_message(uint16_t id, uint8_t* data, uint32_t DLC) {
+	TxHeader.IdType 	= FDCAN_STANDARD_ID;
+	TxHeader.Identifier = id;
+	TxHeader.DataLength = DLC;
+	HAL_FDCAN_AddMessageToTxFifoQ(hdcan, &TxHeader, TxData);
+}
+
+vector<Can*> Can::all_cans;

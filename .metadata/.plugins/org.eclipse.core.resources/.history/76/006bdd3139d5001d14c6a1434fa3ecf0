@@ -1,0 +1,24 @@
+#pragma once
+
+enum BaseState{
+	OPEN,
+	CLOSED
+};
+
+class Base{
+private:
+	BaseState state = CLOSED;
+	GPIO_TypeDef* port;
+	uint16_t pin;
+
+public:
+	Base(GPIO_TypeDef* port, uint16_t pin) : port(port), pin(pin) { }
+
+	void open(){
+		HAL_GPIO_WritePin(GPIOx, GPIO_Pin, PinState);
+	}
+
+	void close(){
+
+	}
+};

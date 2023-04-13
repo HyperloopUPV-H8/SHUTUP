@@ -1,0 +1,6 @@
+#pragma once
+
+class Can{
+public:
+	static void start();
+};

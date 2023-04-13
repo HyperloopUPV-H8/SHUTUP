@@ -1,0 +1,16 @@
+
+#include <Mini-STLIB/DigitalOut.hpp>
+
+vector<DigitalOut*> DigitalOut::all_bases;
+
+DigitalOut::DigitalOut(GPIO_TypeDef* port, uint16_t pin) : port(port), pin(pin) {
+	Base::all_bases.push_back(this);
+}
+
+void DigitalOut::open(){
+	HAL_GPIO_WritePin(port, pin, GPIO_PIN_SET);
+}
+
+void DigitalOut::close(){
+	HAL_GPIO_WritePin(port, pin, GPIO_PIN_RESET);
+}

@@ -1,0 +1,11 @@
+#pragma once
+
+enum
+
+class DigitalIn{
+private:
+
+
+public:
+	DigitalIn();
+};

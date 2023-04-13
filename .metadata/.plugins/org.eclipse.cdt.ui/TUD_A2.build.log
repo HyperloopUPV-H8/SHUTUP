@@ -1,0 +1,388 @@
+02:13:51 **** Incremental Build of configuration Debug for project TUD_A2 ****
+make -j12 all 
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m7 -std=c++20 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32H723xx -c -I../Core/Inc -I../Drivers/STM32H7xx_HAL_Driver/Inc -I../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.cpp:24:24: warning: extra tokens at end of #include directive
+   24 | #include "TUDTests.hpp";
+      |                        ^
+In file included from ../Drivers/CMSIS/Include/core_cm7.h:2178,
+                 from ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h723xx.h:221,
+                 from ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:167,
+                 from ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h:29,
+                 from ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h:27,
+                 from ../Core/Inc/stm32h7xx_hal_conf.h:246,
+                 from ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.cpp:20:
+../Drivers/CMSIS/Include/mpu_armv7.h: In function 'void ARM_MPU_Enable(uint32_t)':
+../Drivers/CMSIS/Include/mpu_armv7.h:195:14: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  195 |   SCB->SHCSR |= SCB_SHCSR_MEMFAULTENA_Msk;
+../Drivers/CMSIS/Include/mpu_armv7.h: In function 'void ARM_MPU_Disable()':
+../Drivers/CMSIS/Include/mpu_armv7.h:207:14: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  207 |   SCB->SHCSR &= ~SCB_SHCSR_MEMFAULTENA_Msk;
+../Drivers/CMSIS/Include/mpu_armv7.h:209:14: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  209 |   MPU->CTRL  &= ~MPU_CTRL_ENABLE_Msk;
+In file included from ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h723xx.h:221,
+                 from ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:167,
+                 from ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h:29,
+                 from ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h:27,
+                 from ../Core/Inc/stm32h7xx_hal_conf.h:246,
+                 from ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.cpp:20:
+../Drivers/CMSIS/Include/core_cm7.h: In function 'void SCB_EnableICache()':
+../Drivers/CMSIS/Include/core_cm7.h:2251:14: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+ 2251 |     SCB->CCR |=  (uint32_t)SCB_CCR_IC_Msk;  /* enable I-Cache */
+      |              ^
+../Drivers/CMSIS/Include/core_cm7.h: In function 'void SCB_DisableICache()':
+../Drivers/CMSIS/Include/core_cm7.h:2267:14: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+ 2267 |     SCB->CCR &= ~(uint32_t)SCB_CCR_IC_Msk;  /* disable I-Cache */
+      |              ^
+../Drivers/CMSIS/Include/core_cm7.h: In function 'void SCB_EnableDCache()':
+../Drivers/CMSIS/Include/core_cm7.h:2353:14: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+ 2353 |     SCB->CCR |=  (uint32_t)SCB_CCR_DC_Msk;  /* enable D-Cache */
+      |              ^
+../Drivers/CMSIS/Include/core_cm7.h: In function 'void SCB_DisableDCache()':
+../Drivers/CMSIS/Include/core_cm7.h:2375:14: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+ 2375 |     SCB->CCR &= ~(uint32_t)SCB_CCR_DC_Msk;  /* disable D-Cache */
+      |              ^
+In file included from ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h:29,
+                 from ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h:27,
+                 from ../Core/Inc/stm32h7xx_hal_conf.h:246,
+                 from ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.cpp:20:
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h: In function 'void LL_ADC_SetCommonPathInternalChAdd(ADC_Common_TypeDef*, uint32_t)':
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:206:38: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  206 | #define SET_BIT(REG, BIT)     ((REG) |= (BIT))
+      |                                ~~~~~~^~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h:2783:3: note: in expansion of macro 'SET_BIT'
+ 2783 |   SET_BIT(ADCxy_COMMON->CCR, PathInternal);
+      |   ^~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h: In function 'void LL_ADC_SetCommonPathInternalChRem(ADC_Common_TypeDef*, uint32_t)':
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:208:38: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  208 | #define CLEAR_BIT(REG, BIT)   ((REG) &= ~(BIT))
+      |                                ~~~~~~^~~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h:2807:3: note: in expansion of macro 'CLEAR_BIT'
+ 2807 |   CLEAR_BIT(ADCxy_COMMON->CCR, PathInternal);
+      |   ^~~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h: In function 'uint32_t LL_ADC_GetCalibrationLinearFactor(ADC_TypeDef*, uint32_t)':
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:208:38: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  208 | #define CLEAR_BIT(REG, BIT)   ((REG) &= ~(BIT))
+      |                                ~~~~~~^~~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h:2961:3: note: in expansion of macro 'CLEAR_BIT'
+ 2961 |   CLEAR_BIT(ADCx->CR, LinearityWord);
+      |   ^~~~~~~~~
+In file included from ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_adc.h:31,
+                 from ../Core/Inc/stm32h7xx_hal_conf.h:298,
+                 from ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.cpp:20:
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h: In function 'void LL_ADC_SetChannelPreselection(ADC_TypeDef*, uint32_t)':
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h:3242:24: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+ 3242 |       ADCx->PCSEL_RES0 |= (1UL << (__LL_ADC_CHANNEL_TO_DECIMAL_NB(Channel) & 0x1FUL));
+      |       ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h:29,
+                 from ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h:27,
+                 from ../Core/Inc/stm32h7xx_hal_conf.h:246,
+                 from ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.cpp:20:
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h: In function 'void LL_ADC_EnableDMAReq(ADC_TypeDef*)':
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:206:38: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  206 | #define SET_BIT(REG, BIT)     ((REG) |= (BIT))
+      |                                ~~~~~~^~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h:4426:3: note: in expansion of macro 'SET_BIT'
+ 4426 |   SET_BIT(ADCx->CFGR, ADC3_CFGR_DMAEN);
+      |   ^~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h: In function 'void LL_ADC_DisableDMAReq(ADC_TypeDef*)':
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:208:38: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  208 | #define CLEAR_BIT(REG, BIT)   ((REG) &= ~(BIT))
+      |                                ~~~~~~^~~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h:4431:3: note: in expansion of macro 'CLEAR_BIT'
+ 4431 |   CLEAR_BIT (ADCx->CFGR, ADC3_CFGR_DMAEN);
+      |   ^~~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h: In function 'void LL_ADC_DisableDeepPowerDown(ADC_TypeDef*)':
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:208:38: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  208 | #define CLEAR_BIT(REG, BIT)   ((REG) &= ~(BIT))
+      |                                ~~~~~~^~~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h:6802:3: note: in expansion of macro 'CLEAR_BIT'
+ 6802 |   CLEAR_BIT(ADCx->CR, (ADC_CR_DEEPPWD | ADC_CR_BITS_PROPERTY_RS));
+      |   ^~~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h: In function 'void LL_ADC_DisableInternalRegulator(ADC_TypeDef*)':
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:208:38: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  208 | #define CLEAR_BIT(REG, BIT)   ((REG) &= ~(BIT))
+      |                                ~~~~~~^~~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h:6851:3: note: in expansion of macro 'CLEAR_BIT'
+ 6851 |   CLEAR_BIT(ADCx->CR, (ADC_CR_ADVREGEN | ADC_CR_BITS_PROPERTY_RS));
+      |   ^~~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h: In function 'void LL_ADC_EnableIT_ADRDY(ADC_TypeDef*)':
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:206:38: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  206 | #define SET_BIT(REG, BIT)     ((REG) |= (BIT))
+      |                                ~~~~~~^~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h:7971:3: note: in expansion of macro 'SET_BIT'
+ 7971 |   SET_BIT(ADCx->IER, LL_ADC_IT_ADRDY);
+      |   ^~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h: In function 'void LL_ADC_EnableIT_EOC(ADC_TypeDef*)':
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:206:38: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  206 | #define SET_BIT(REG, BIT)     ((REG) |= (BIT))
+      |                                ~~~~~~^~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h:7982:3: note: in expansion of macro 'SET_BIT'
+ 7982 |   SET_BIT(ADCx->IER, LL_ADC_IT_EOC);
+      |   ^~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h: In function 'void LL_ADC_EnableIT_EOS(ADC_TypeDef*)':
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:206:38: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  206 | #define SET_BIT(REG, BIT)     ((REG) |= (BIT))
+      |                                ~~~~~~^~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h:7993:3: note: in expansion of macro 'SET_BIT'
+ 7993 |   SET_BIT(ADCx->IER, LL_ADC_IT_EOS);
+      |   ^~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h: In function 'void LL_ADC_EnableIT_OVR(ADC_TypeDef*)':
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:206:38: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  206 | #define SET_BIT(REG, BIT)     ((REG) |= (BIT))
+      |                                ~~~~~~^~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h:8004:3: note: in expansion of macro 'SET_BIT'
+ 8004 |   SET_BIT(ADCx->IER, LL_ADC_IT_OVR);
+      |   ^~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h: In function 'void LL_ADC_EnableIT_EOSMP(ADC_TypeDef*)':
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:206:38: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  206 | #define SET_BIT(REG, BIT)     ((REG) |= (BIT))
+      |                                ~~~~~~^~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h:8015:3: note: in expansion of macro 'SET_BIT'
+ 8015 |   SET_BIT(ADCx->IER, LL_ADC_IT_EOSMP);
+      |   ^~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h: In function 'void LL_ADC_EnableIT_JEOC(ADC_TypeDef*)':
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:206:38: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  206 | #define SET_BIT(REG, BIT)     ((REG) |= (BIT))
+      |                                ~~~~~~^~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h:8026:3: note: in expansion of macro 'SET_BIT'
+ 8026 |   SET_BIT(ADCx->IER, LL_ADC_IT_JEOC);
+      |   ^~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h: In function 'void LL_ADC_EnableIT_JEOS(ADC_TypeDef*)':
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:206:38: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  206 | #define SET_BIT(REG, BIT)     ((REG) |= (BIT))
+      |                                ~~~~~~^~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h:8037:3: note: in expansion of macro 'SET_BIT'
+ 8037 |   SET_BIT(ADCx->IER, LL_ADC_IT_JEOS);
+      |   ^~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h: In function 'void LL_ADC_EnableIT_JQOVF(ADC_TypeDef*)':
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:206:38: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  206 | #define SET_BIT(REG, BIT)     ((REG) |= (BIT))
+      |                                ~~~~~~^~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h:8048:3: note: in expansion of macro 'SET_BIT'
+ 8048 |   SET_BIT(ADCx->IER, LL_ADC_IT_JQOVF);
+      |   ^~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h: In function 'void LL_ADC_EnableIT_AWD1(ADC_TypeDef*)':
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:206:38: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  206 | #define SET_BIT(REG, BIT)     ((REG) |= (BIT))
+      |                                ~~~~~~^~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h:8059:3: note: in expansion of macro 'SET_BIT'
+ 8059 |   SET_BIT(ADCx->IER, LL_ADC_IT_AWD1);
+      |   ^~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h: In function 'void LL_ADC_EnableIT_AWD2(ADC_TypeDef*)':
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:206:38: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  206 | #define SET_BIT(REG, BIT)     ((REG) |= (BIT))
+      |                                ~~~~~~^~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h:8070:3: note: in expansion of macro 'SET_BIT'
+ 8070 |   SET_BIT(ADCx->IER, LL_ADC_IT_AWD2);
+      |   ^~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h: In function 'void LL_ADC_EnableIT_AWD3(ADC_TypeDef*)':
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:206:38: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  206 | #define SET_BIT(REG, BIT)     ((REG) |= (BIT))
+      |                                ~~~~~~^~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h:8081:3: note: in expansion of macro 'SET_BIT'
+ 8081 |   SET_BIT(ADCx->IER, LL_ADC_IT_AWD3);
+      |   ^~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h: In function 'void LL_ADC_DisableIT_ADRDY(ADC_TypeDef*)':
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:208:38: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  208 | #define CLEAR_BIT(REG, BIT)   ((REG) &= ~(BIT))
+      |                                ~~~~~~^~~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h:8092:3: note: in expansion of macro 'CLEAR_BIT'
+ 8092 |   CLEAR_BIT(ADCx->IER, LL_ADC_IT_ADRDY);
+      |   ^~~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h: In function 'void LL_ADC_DisableIT_EOC(ADC_TypeDef*)':
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:208:38: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  208 | #define CLEAR_BIT(REG, BIT)   ((REG) &= ~(BIT))
+      |                                ~~~~~~^~~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h:8103:3: note: in expansion of macro 'CLEAR_BIT'
+ 8103 |   CLEAR_BIT(ADCx->IER, LL_ADC_IT_EOC);
+      |   ^~~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h: In function 'void LL_ADC_DisableIT_EOS(ADC_TypeDef*)':
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:208:38: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  208 | #define CLEAR_BIT(REG, BIT)   ((REG) &= ~(BIT))
+      |                                ~~~~~~^~~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h:8114:3: note: in expansion of macro 'CLEAR_BIT'
+ 8114 |   CLEAR_BIT(ADCx->IER, LL_ADC_IT_EOS);
+      |   ^~~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h: In function 'void LL_ADC_DisableIT_OVR(ADC_TypeDef*)':
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:208:38: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  208 | #define CLEAR_BIT(REG, BIT)   ((REG) &= ~(BIT))
+      |                                ~~~~~~^~~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h:8125:3: note: in expansion of macro 'CLEAR_BIT'
+ 8125 |   CLEAR_BIT(ADCx->IER, LL_ADC_IT_OVR);
+      |   ^~~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h: In function 'void LL_ADC_DisableIT_EOSMP(ADC_TypeDef*)':
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:208:38: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  208 | #define CLEAR_BIT(REG, BIT)   ((REG) &= ~(BIT))
+      |                                ~~~~~~^~~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h:8136:3: note: in expansion of macro 'CLEAR_BIT'
+ 8136 |   CLEAR_BIT(ADCx->IER, LL_ADC_IT_EOSMP);
+      |   ^~~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h: In function 'void LL_ADC_DisableIT_JEOC(ADC_TypeDef*)':
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:208:38: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  208 | #define CLEAR_BIT(REG, BIT)   ((REG) &= ~(BIT))
+      |                                ~~~~~~^~~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h:8147:3: note: in expansion of macro 'CLEAR_BIT'
+ 8147 |   CLEAR_BIT(ADCx->IER, LL_ADC_IT_JEOC);
+      |   ^~~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h: In function 'void LL_ADC_DisableIT_JEOS(ADC_TypeDef*)':
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:208:38: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  208 | #define CLEAR_BIT(REG, BIT)   ((REG) &= ~(BIT))
+      |                                ~~~~~~^~~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h:8158:3: note: in expansion of macro 'CLEAR_BIT'
+ 8158 |   CLEAR_BIT(ADCx->IER, LL_ADC_IT_JEOS);
+      |   ^~~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h: In function 'void LL_ADC_DisableIT_JQOVF(ADC_TypeDef*)':
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:208:38: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  208 | #define CLEAR_BIT(REG, BIT)   ((REG) &= ~(BIT))
+      |                                ~~~~~~^~~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h:8169:3: note: in expansion of macro 'CLEAR_BIT'
+ 8169 |   CLEAR_BIT(ADCx->IER, LL_ADC_IT_JQOVF);
+      |   ^~~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h: In function 'void LL_ADC_DisableIT_AWD1(ADC_TypeDef*)':
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:208:38: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  208 | #define CLEAR_BIT(REG, BIT)   ((REG) &= ~(BIT))
+      |                                ~~~~~~^~~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h:8180:3: note: in expansion of macro 'CLEAR_BIT'
+ 8180 |   CLEAR_BIT(ADCx->IER, LL_ADC_IT_AWD1);
+      |   ^~~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h: In function 'void LL_ADC_DisableIT_AWD2(ADC_TypeDef*)':
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:208:38: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  208 | #define CLEAR_BIT(REG, BIT)   ((REG) &= ~(BIT))
+      |                                ~~~~~~^~~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h:8191:3: note: in expansion of macro 'CLEAR_BIT'
+ 8191 |   CLEAR_BIT(ADCx->IER, LL_ADC_IT_AWD2);
+      |   ^~~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h: In function 'void LL_ADC_DisableIT_AWD3(ADC_TypeDef*)':
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:208:38: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  208 | #define CLEAR_BIT(REG, BIT)   ((REG) &= ~(BIT))
+      |                                ~~~~~~^~~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h:8202:3: note: in expansion of macro 'CLEAR_BIT'
+ 8202 |   CLEAR_BIT(ADCx->IER, LL_ADC_IT_AWD3);
+      |   ^~~~~~~~~
+In file included from ../Core/Inc/Mini-STLIB/Stream.hpp:3,
+                 from ../Core/Inc/Mini-STLIB/Mini-STLIB.hpp:30,
+                 from ../Core/Inc/TUDTests.hpp:3,
+                 from ../Core/Src/main.cpp:24:
+../Core/Inc/Mini-STLIB/Timer.hpp: In member function 'void Timer::interrupt()':
+../Core/Inc/Mini-STLIB/Timer.hpp:41:9: warning: enumeration value 'ONCE' not handled in switch [-Wswitch]
+   41 |   switch(current_operation_mode) {
+      |         ^
+../Core/Inc/Mini-STLIB/Timer.hpp:41:9: warning: enumeration value 'CHRONOMETER' not handled in switch [-Wswitch]
+In file included from ../Core/Inc/Mini-STLIB/Mini-STLIB.hpp:30,
+                 from ../Core/Inc/TUDTests.hpp:3,
+                 from ../Core/Src/main.cpp:24:
+../Core/Inc/Mini-STLIB/Stream.hpp: In member function 'void StreamMessage::unparse(uint8_t*)':
+../Core/Inc/Mini-STLIB/Stream.hpp:48:20: warning: comparison of integer expressions of different signedness: 'int' and 'std::vector<unsigned int>::size_type' {aka 'unsigned int'} [-Wsign-compare]
+   48 |   for(int i = 0; i < sizes.size(); i++){
+      |                  ~~^~~~~~~~~~~~~~
+In file included from ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h:29,
+                 from ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h:27,
+                 from ../Core/Inc/stm32h7xx_hal_conf.h:246,
+                 from ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.cpp:20:
+../Core/Src/main.cpp: In function 'void MX_DMA_Init()':
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:206:38: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  206 | #define SET_BIT(REG, BIT)     ((REG) |= (BIT))
+      |                                ~~~~~~^~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h:972:41: note: in expansion of macro 'SET_BIT'
+  972 |                                         SET_BIT(RCC->AHB1ENR, RCC_AHB1ENR_DMA1EN);\
+      |                                         ^~~~~~~
+../Core/Src/main.cpp:1269:3: note: in expansion of macro '__HAL_RCC_DMA1_CLK_ENABLE'
+ 1269 |   __HAL_RCC_DMA1_CLK_ENABLE();
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.cpp: In function 'void MX_GPIO_Init()':
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:206:38: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  206 | #define SET_BIT(REG, BIT)     ((REG) |= (BIT))
+      |                                ~~~~~~^~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h:1441:41: note: in expansion of macro 'SET_BIT'
+ 1441 |                                         SET_BIT(RCC->AHB4ENR, RCC_AHB4ENR_GPIOCEN);\
+      |                                         ^~~~~~~
+../Core/Src/main.cpp:1288:3: note: in expansion of macro '__HAL_RCC_GPIOC_CLK_ENABLE'
+ 1288 |   __HAL_RCC_GPIOC_CLK_ENABLE();
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:206:38: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  206 | #define SET_BIT(REG, BIT)     ((REG) |= (BIT))
+      |                                ~~~~~~^~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h:1465:41: note: in expansion of macro 'SET_BIT'
+ 1465 |                                         SET_BIT(RCC->AHB4ENR, RCC_AHB4ENR_GPIOFEN);\
+      |                                         ^~~~~~~
+../Core/Src/main.cpp:1289:3: note: in expansion of macro '__HAL_RCC_GPIOF_CLK_ENABLE'
+ 1289 |   __HAL_RCC_GPIOF_CLK_ENABLE();
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:206:38: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  206 | #define SET_BIT(REG, BIT)     ((REG) |= (BIT))
+      |                                ~~~~~~^~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h:1481:41: note: in expansion of macro 'SET_BIT'
+ 1481 |                                         SET_BIT(RCC->AHB4ENR, RCC_AHB4ENR_GPIOHEN);\
+      |                                         ^~~~~~~
+../Core/Src/main.cpp:1290:3: note: in expansion of macro '__HAL_RCC_GPIOH_CLK_ENABLE'
+ 1290 |   __HAL_RCC_GPIOH_CLK_ENABLE();
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:206:38: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  206 | #define SET_BIT(REG, BIT)     ((REG) |= (BIT))
+      |                                ~~~~~~^~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h:1425:41: note: in expansion of macro 'SET_BIT'
+ 1425 |                                         SET_BIT(RCC->AHB4ENR, RCC_AHB4ENR_GPIOAEN);\
+      |                                         ^~~~~~~
+../Core/Src/main.cpp:1291:3: note: in expansion of macro '__HAL_RCC_GPIOA_CLK_ENABLE'
+ 1291 |   __HAL_RCC_GPIOA_CLK_ENABLE();
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:206:38: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  206 | #define SET_BIT(REG, BIT)     ((REG) |= (BIT))
+      |                                ~~~~~~^~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h:1433:41: note: in expansion of macro 'SET_BIT'
+ 1433 |                                         SET_BIT(RCC->AHB4ENR, RCC_AHB4ENR_GPIOBEN);\
+      |                                         ^~~~~~~
+../Core/Src/main.cpp:1292:3: note: in expansion of macro '__HAL_RCC_GPIOB_CLK_ENABLE'
+ 1292 |   __HAL_RCC_GPIOB_CLK_ENABLE();
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:206:38: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  206 | #define SET_BIT(REG, BIT)     ((REG) |= (BIT))
+      |                                ~~~~~~^~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h:1457:41: note: in expansion of macro 'SET_BIT'
+ 1457 |                                         SET_BIT(RCC->AHB4ENR, RCC_AHB4ENR_GPIOEEN);\
+      |                                         ^~~~~~~
+../Core/Src/main.cpp:1293:3: note: in expansion of macro '__HAL_RCC_GPIOE_CLK_ENABLE'
+ 1293 |   __HAL_RCC_GPIOE_CLK_ENABLE();
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~
+../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h:206:38: warning: compound assignment with 'volatile'-qualified left operand is deprecated [-Wvolatile]
+  206 | #define SET_BIT(REG, BIT)     ((REG) |= (BIT))
+      |                                ~~~~~~^~~~~~~~
+../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h:1449:41: note: in expansion of macro 'SET_BIT'
+ 1449 |                                         SET_BIT(RCC->AHB4ENR, RCC_AHB4ENR_GPIODEN);\
+      |                                         ^~~~~~~
+../Core/Src/main.cpp:1294:3: note: in expansion of macro '__HAL_RCC_GPIOD_CLK_ENABLE'
+ 1294 |   __HAL_RCC_GPIOD_CLK_ENABLE();
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from ../Core/Inc/Mini-STLIB/Mini-STLIB.hpp:30,
+                 from ../Core/Inc/TUDTests.hpp:3,
+                 from ../Core/Src/main.cpp:24:
+../Core/Inc/Mini-STLIB/Stream.hpp: In static member function 'static std::optional<StreamMessage*> StreamMessage::FromPin(Pin*)':
+../Core/Inc/Mini-STLIB/Stream.hpp:76:2: warning: control reaches end of non-void function [-Wreturn-type]
+   76 |  }
+      |  ^
+arm-none-eabi-g++ -o "TUD_A2.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\Users\dougk\OneDrive\Escritorio\Firmware_H8\TUD_A2\STM32H723ZGTX_FLASH.ld" -Wl,-Map="TUD_A2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: TUD_A2.elf
+ 
+arm-none-eabi-size   TUD_A2.elf 
+arm-none-eabi-objdump -h -S  TUD_A2.elf  > "TUD_A2.list"
+   text	   data	    bss	    dec	    hex	filename
+ 134396	    220	   6980	 141596	  2291c	TUD_A2.elf
+Finished building: default.size.stdout
+ 
+Finished building: TUD_A2.list
+ 
+
+02:13:56 Build Finished. 0 errors, 50 warnings. (took 5s.483ms)
+

@@ -1,0 +1,52 @@
+#include "Mini-STLIB/Can.hpp"
+
+Can::Can(FDCAN_HandleTypeDef* hdcan) : hdcan(hdcan) {
+	Can::all_cans.push_back(this);
+}
+
+void Can::start_all_cans() {
+	for(auto can : Can::all_cans)
+		HAL_FDCAN_Start(can->hdcan);
+}
+
+void Can::send_message(uint16_t id, uint8_t* data, uint32_t size) {
+	TxHeader.IdType 	= FDCAN_STANDARD_ID;
+	TxHeader.Identifier = id;
+	TxHeader.DataLength = size;
+	for(uint32_t i = 0; i < MAX_MESSAGE_SIZE; i++)
+		TxData[i] = data[i];
+	HAL_FDCAN_AddMessageToTxFifoQ(hdcan, &TxHeader, TxData);
+}
+
+uint32_t Can::get_dlc_from_size(uint32_t size){
+	DLC prev_DLC;
+	for(auto DLC : Can::DLCS){
+		if(DLC.size > size)
+			return prev_DLC;
+		prev_DLC = DLC;
+	}
+
+
+	return 0;
+}
+
+vector<Can*> Can::all_cans;
+
+const Can::DLC Can::DLCS[] = {
+		{0, FDCAN_DLC_BYTES_0},
+		{1, FDCAN_DLC_BYTES_1},
+		{2, FDCAN_DLC_BYTES_2},
+		{3, FDCAN_DLC_BYTES_3},
+		{4, FDCAN_DLC_BYTES_4},
+		{5, FDCAN_DLC_BYTES_5},
+		{6, FDCAN_DLC_BYTES_6},
+		{7, FDCAN_DLC_BYTES_7},
+		{8, FDCAN_DLC_BYTES_8},
+		{12, FDCAN_DLC_BYTES_12},
+		{16, FDCAN_DLC_BYTES_16},
+		{20, FDCAN_DLC_BYTES_20},
+		{24, FDCAN_DLC_BYTES_24},
+		{32, FDCAN_DLC_BYTES_32},
+		{48, FDCAN_DLC_BYTES_48},
+		{64, FDCAN_DLC_BYTES_64}
+};

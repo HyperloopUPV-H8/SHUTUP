@@ -1,0 +1,12 @@
+#pragma once
+
+#include "stm32h7xx_hal.h"
+
+class Can {
+private:
+
+
+public:
+	Can();
+	static void start();
+};

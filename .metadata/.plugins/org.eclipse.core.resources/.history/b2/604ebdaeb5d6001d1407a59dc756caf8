@@ -1,0 +1,10 @@
+#pragma once
+
+class Can {
+private:
+
+
+public:
+	Can(TIM);
+	static void start();
+};

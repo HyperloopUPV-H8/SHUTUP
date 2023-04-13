@@ -1,0 +1,20 @@
+#pragma once
+
+#include "stm32h7xx_hal.h"
+
+enum PinMode {
+	NONE,
+	AnalogInput,
+	AnalogOutput,
+	InputCapture,
+	DigitalOutput,
+	DigitalInput
+};
+
+class Pin {
+public:
+	Pin(GPIO_TypeDef* port, uint16_t pin) : port(port), pin(pin) {  }
+	GPIO_TypeDef* port;
+	uint16_t pin;
+	PinMode mode;
+};
