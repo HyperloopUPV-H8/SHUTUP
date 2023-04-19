@@ -1,5 +1,0 @@
-#include "Mini-STLIB/Can.hpp"
-
-Can::Can(FDCAN_HandleTypeDef* hdcan) : hdcan(hdcan){
-	Can::all_cans
-}

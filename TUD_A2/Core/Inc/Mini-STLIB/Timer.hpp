@@ -40,7 +40,7 @@ private:
 	void interrupt() {
 		switch(current_operation_mode) {
 		case NONE:
-			stop_all();
+			reset();
 		case CYCLIC:
 			current_func();
 			break;
@@ -105,25 +105,17 @@ public:
 		HAL_TIM_Base_Start_IT(timer);
 	}
 
-//	void chronometer_start(UNITS units) {
-//		current_operation_mode = CHRONOMETER;
-//		current_units = units;
-//		current_value = 0;
-//		timer->Instance->CNT = 0;
-//		timer->Instance->PSC = TIMER_CLOCK_FREQ / to_seconds(units) - 1;
-//		timer->Instance->ARR = 65535;
-//		HAL_TIM_Base_Start_IT(timer);
-//	}
-//
-//	uint32_t chronometer_stop(){
-//		HAL_TIM_Base_Stop(timer);
-//		current_operation_mode = NONE;
-//		return current_value * 65536 + timer->Instance->CNT;
-//	}
-
-	void stop_all(){
+	void reset(){
 		HAL_TIM_Base_Stop_IT(timer);
 		current_operation_mode = NONE;
+	}
+
+	void stop_interrupt(){
+		HAL_TIM_Base_Stop_IT(timer);
+	}
+
+	void start_interrupt(){
+		HAL_TIM_Base_Start_IT(timer);
 	}
 
 	static void interrupt_all_timers(TIM_HandleTypeDef* timer){

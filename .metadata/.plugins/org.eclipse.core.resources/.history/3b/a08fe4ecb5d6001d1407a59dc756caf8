@@ -1,5 +1,0 @@
-#include "Mini-STLIB/Can.hpp"
-
-Can(FDCAN_HandleTypeDef* hdcan){
-
-}

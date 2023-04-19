@@ -1,0 +1,189 @@
+#pragma once
+
+#include "Timer.hpp"
+#include "Can.hpp"
+#include "Models/Pin.hpp"
+#include "AnalogIn.hpp"
+#include "InputCapture.hpp"
+#include "DigitalIn.hpp"
+#include "stm32h7xx_hal.h"
+#include <memory.h>
+#include <optional>
+#include <vector>
+#include <map>
+
+using namespace std;
+
+enum State		{ FREE, OCCUPIED };
+enum Precision  { _8_bits = 1, _16_bits = 2, _24_bits = 3, _32_bits = 4, };
+
+class StreamMessage{
+public:
+	static Precision precision_mode;
+	static map<Precision, unsigned long> precision_max;
+	size_t size;
+	float min, max;
+	void* ptr;
+	bool  do_scale;
+
+	StreamMessage(float* ptr, float min, float max) : ptr(ptr), min(min), max(max){
+		do_scale = true;
+		size = precision_mode;
+	}
+
+	StreamMessage(uint8_t* ptr) : ptr(ptr){
+		do_scale = false;
+		size = 1;
+	}
+
+	void unparse(uint8_t* d) {
+		if(do_scale){
+			float scale = (*((float*) ptr) - min) / (max - min);
+			uint32_t data = (uint32_t) (scale * precision_max[(Precision) size]);
+			memcpy(d, &data, size);
+		}else{
+			memcpy(d, ptr, size);
+		}
+	}
+
+	static StreamMessage* FromAnalogIn(AnalogIn* in){
+		return new StreamMessage(&in->voltage, 0, 3.3);
+	}
+
+	static StreamMessage* FromDigigalIn(DigitalIn* in){
+		return new StreamMessage((uint8_t*) &in->state);
+	}
+
+	static StreamMessage* FromInputCapture(InputCapture* in){
+		return new StreamMessage(&in->duty, 0, 100);
+	}
+
+	static optional<StreamMessage*> FromPin(Pin* pin){
+		if(pin->mode == ANALOG_INPUT)
+			return FromAnalogIn(AnalogIn::analog_in_from_pin[pin]);
+		if(pin->mode == DIGITAL_INPUT)
+			return FromDigigalIn(DigitalIn::pin_to_digital_in[pin]);
+		if(pin->mode == INPUT_CAPTURE)
+			return FromInputCapture(InputCapture::pin_to_input_capture[pin]);
+	}
+
+	static bool set_precision_mode(uint8_t precision){
+		if(precision < 0 || precision > 4)
+			return false;
+		precision_mode = (Precision) precision;
+		return true;
+	}
+};
+
+class Stream {
+public:
+	State state = FREE;
+	uint32_t frequency;
+
+private:
+	static uint8_t current_id;
+	static vector<Stream*> streams;
+	vector<StreamMessage*> messages;
+	unsigned int size = 0;
+	uint8_t id;
+	Timer* timer;
+	Can* can;
+
+	bool is_available(unsigned int frequency, unsigned int size){
+		bool is_occupied		= this ->state == OCCUPIED;
+		bool is_full			= (this->size + size) > 64 ;
+		bool frequencies_match	= this->frequency == frequency;
+		return !is_occupied || (frequencies_match && !is_full);
+	}
+
+	void send_ok_response(uint8_t offset){
+		can->TxData[0] = Can::Ok;
+		can->TxData[1] = id;
+		can->TxData[2] = offset;
+		can->send_message(READ_STREAM_ID, 3);
+	}
+
+	void empty(uint8_t offset){
+		timer->stop_interrupt();
+
+		uint8_t current_offset = 0;
+		int i = 0;
+		while(i < messages.size()){
+			StreamMessage* message = messages[i];
+			size_t message_size = message->size;
+			if(current_offset == offset || offset == 255){
+				messages.erase(messages.begin() + i);
+				this->size -= message_size;
+				delete message;
+			}else{
+				i++;
+			}
+			current_offset += message_size;
+		}
+
+		if(this->size != 0){
+			timer->start_interrupt();
+		}else{
+			timer->reset();
+			state = FREE;
+			frequency = 0;
+			size = 0;
+		}
+	}
+
+public:
+
+	Stream(Timer* timer, Can* can) : timer(timer), can(can) {
+		Stream::streams.push_back(this);
+		id = current_id;
+		current_id ++;
+	}
+
+	void send_all_messages(){
+		unsigned int current_position = 0;
+		memset(can->TxData, 255, Can::MAX_MESSAGE_SIZE);
+		for(auto message : messages){
+			message->unparse(&can->TxData[current_position]);
+			current_position += message->size;
+		}
+		can->send_message(id, size);
+	}
+
+	void add_message(uint32_t frequency, StreamMessage* message){
+		messages.push_back(message);
+		if(state == FREE){
+			state = OCCUPIED;
+			timer->execute_at([&](){ send_all_messages(); }, frequency);
+		};
+		this -> frequency = frequency;
+		send_ok_response(size);
+ 		size += message->size;
+	}
+
+	static bool add_stream(unsigned int frequency, Pin* pin) {
+		optional<StreamMessage*> message_optional = StreamMessage::FromPin(pin);
+		if(message_optional){
+			StreamMessage* message = message_optional.value();
+			for(auto s : streams){
+				if(s->is_available(frequency, message->size)){
+					s->add_message(frequency, message);
+					return true;
+				}
+
+			}
+		}
+		return false;
+	}
+
+	bool void empty(uint8_t id, uint8_t offset) {
+
+		for(auto stream : streams) {
+			if(stream->id == id || id ==  255) {
+				stream->empty(offset);
+				found_message = true;
+			}
+		}
+		return result;
+	}
+
+};

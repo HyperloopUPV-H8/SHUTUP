@@ -1,5 +1,0 @@
-
-#include "Mini-STLIB/AnalogIn.hpp"
-
-vector<AnalogIn*> AnalogIn::all_analog_ins;
-map<ADC_HandleTypeDef*, ADC> AnalogIn::adcs;
