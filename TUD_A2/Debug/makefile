@@ -79,8 +79,8 @@ all: main-build
 main-build: TUD_A2.elf secondary-outputs
 
 # Tool invocations
-TUD_A2.elf TUD_A2.map: $(OBJS) $(USER_OBJS) C:\Users\dougk\OneDrive\Escritorio\Firmware_H8\TUD_A2\STM32H723ZGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-g++ -o "TUD_A2.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"C:\Users\dougk\OneDrive\Escritorio\Firmware_H8\TUD_A2\STM32H723ZGTX_FLASH.ld" -Wl,-Map="TUD_A2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+TUD_A2.elf TUD_A2.map: $(OBJS) $(USER_OBJS) /home/dgoncas/Desktop/SHUTUP/TUD_A2/STM32H723ZGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-g++ -o "TUD_A2.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"/home/dgoncas/Desktop/SHUTUP/TUD_A2/STM32H723ZGTX_FLASH.ld" -Wl,-Map="TUD_A2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

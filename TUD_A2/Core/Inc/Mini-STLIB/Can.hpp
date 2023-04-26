@@ -11,14 +11,28 @@
 
 using namespace std;
 
-// CAN SERVICE
+// Requests
 
-const uint16_t READ_ONCE_ID 	= 0b00100;
-const uint16_t READ_STREAM_ID	= 0b00101;
-const uint16_t WRITE_ONCE_ID 	= 0b00110;
-const uint16_t SET_PRECISION_ID	= 0b00111;
-const uint16_t CANCEL_STREAM_ID	= 0b01000;
-const uint16_t INFO_MESSAGE		= 0b10000;
+const uint16_t ID_READ_INPUT_CAPTURE 			= 81;
+const uint16_t ID_READ_ANALOG_IN 				= 82;
+const uint16_t ID_READ_DIGITAL_IN				= 83;
+const uint16_t ID_STREAM_INPUT_CAPTURE			= 84;
+const uint16_t ID_STREAM_ANALOG_IN				= 85;
+const uint16_t ID_STREAM_DIGITAL_IN				= 86;
+const uint16_t ID_WRITE_DIGITAL_OUT				= 87;
+const uint16_t ID_WRITE_ANALOG_OUT				= 88;
+const uint16_t ID_SET_PRECISION					= 89;
+const uint16_t ID_CANCEL_STREAM					= 90;
+const uint16_t ID_INFO_MESSAGE					= 91;
+
+// Responses
+
+const uint16_t ID_READ_INPUT_CAPTURE_REPLY 		= 92;
+const uint16_t ID_READ_ANALOG_IN_REPLY			= 93;
+const uint16_t ID_READ_DIGITAL_IN_REPLY			= 94;
+const uint16_t ID_STREAM_INPUT_CAPTURE_REPLY 	= 95;
+const uint16_t ID_STREAM_ANALOG_IN_REPLY 		= 96;
+const uint16_t ID_STREAM_DIGITAL_IN_REPLY 		= 97;
 
 struct DLC {
 	uint32_t size;

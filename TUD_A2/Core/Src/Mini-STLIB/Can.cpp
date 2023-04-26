@@ -68,14 +68,14 @@ void Can::send_error_message(uint16_t id, const char* str){
 }
 
 void Can::send_ok_message(){
-	char ok_message[] = "Ok";
-	send_message(INFO_MESSAGE,(uint8_t*) ok_message, strlen(ok_message));
+	char ok_message[] = "Ok ";
+	send_message(ID_INFO_MESSAGE,(uint8_t*) ok_message, strlen(ok_message));
 }
 
 void Can::send_packet(Packet* packet) {
 	optional<uint32_t> dlc = get_dlc_from_size(packet->size);
 	if(dlc){
-		TxHeader.IdType 	= FDCAN_STANDARD_ID;
+		TxHeader.IdType 	= FDCAN_EXTENDED_ID;
 		TxHeader.Identifier = packet->id;
 		TxHeader.DataLength = dlc.value();
 		memset(TxData, 255, dlc.value());

@@ -29,47 +29,39 @@ bool InputCapture::channel_is_active(){
 	return false;
 }
 
-float InputCapture::interrupt() {
+void InputCapture::interrupt() {
 	if(channel_is_active()){
 		GPIO_PinState state = HAL_GPIO_ReadPin(pin->port, pin->pin);
 
 		// Capture first rising edge
 		if(rising_edge == -1 && falling_edge == -1 && state ==  GPIO_PIN_SET){
 			rising_edge = HAL_TIM_ReadCapturedValue(timer, channel);
-			return frequency;
+			return;
 		}
 
 		// Capture falling edge
 		if(rising_edge != -1 && falling_edge == -1 && state ==  GPIO_PIN_RESET){
 			falling_edge = HAL_TIM_ReadCapturedValue(timer, channel);
-			return frequency;
+			return;
 		}
 
 		// Capture second rising edge
 		if(rising_edge != -1 && falling_edge != -1 && state ==  GPIO_PIN_SET){
-			uint32_t duty_count = absolute_difference(falling_edge, rising_edge);
-			uint32_t new_rising_edge	= HAL_TIM_ReadCapturedValue(timer, channel);
-			uint32_t freq_count = absolute_difference(new_rising_edge, rising_edge);
-
-			if(freq_count != 0 && duty_count != 0){
-				float new_duty = ((float) duty_count) / freq_count * 100;
-				float new_freq = ((float) 277777777) / freq_count;
-
-				DutyAverage.add_value(new_duty);
-				FrequencyAverage.add_value(new_freq);
-				frequency		= FrequencyAverage.current_value;
-				duty			= DutyAverage.current_value;
-
-				frequency_i		= frequency * 10000;
-				duty_i			= duty * 10000;
-
-				rising_edge		= -1;
-				falling_edge	= -1;
+			duty_count 	 = absolute_difference(falling_edge, rising_edge);
+			uint32_t new_rising_edge = HAL_TIM_ReadCapturedValue(timer, channel);
+			freq_count 	 = absolute_difference(new_rising_edge, rising_edge);
+			if(freq_count > 9300){
+				int a = 0;
 			}
+
+			if(duty_count < 4200){
+				int a = 0;
+			}
+			rising_edge		= -1;
+			falling_edge	= -1;
 		}
 	}
 
-	return frequency;
 }
 
 void InputCapture::start_all_input_captures(){
@@ -85,7 +77,8 @@ void InputCapture::interrupt_of_all_input_captures(TIM_HandleTypeDef* timer){
 }
 
 void InputCapture::reset(){
-	frequency = 0;
+	duty_count = 0;
+	freq_count = 0;
 	duty = 0;
 }
 
@@ -95,5 +88,10 @@ void InputCapture::start(){
 
 void InputCapture::stop(){
 	HAL_TIM_IC_Stop_IT(timer, channel);
+}
+
+float InputCapture::get_duty(){
+	duty = (float) (duty_count) / freq_count * 100;
+	return duty;
 }
 

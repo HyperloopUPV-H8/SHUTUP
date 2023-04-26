@@ -13,13 +13,13 @@ using namespace std;
 class InputCapture {
 private:
 	static const uint32_t TIMER_CLOK_FREQ = 277777777;
-	static const uint32_t MOVING_AVERAGE_SIZE = 3;
-	MovingAverage<MOVING_AVERAGE_SIZE, float> DutyAverage;
-	MovingAverage<MOVING_AVERAGE_SIZE, float> FrequencyAverage;
 	int rising_edge = -1, falling_edge = -1;
+	int period = -1;
+	int low_time = -1;
+	uint32_t duty_count, freq_count;
 
 	uint32_t absolute_difference(uint32_t a, uint32_t b);
-	float interrupt();
+	void interrupt();
 	bool channel_is_active();
 
 public:
@@ -28,16 +28,14 @@ public:
 	TIM_HandleTypeDef* timer;
 	uint32_t channel;
 	Pin* pin;
-
-	float frequency, duty;
-	uint32_t frequency_i, duty_i;
-
+	float duty;
 	InputCapture(TIM_HandleTypeDef* timer, uint32_t channel, Pin* pin);
 	static void start_all_input_captures();
 	static void interrupt_of_all_input_captures(TIM_HandleTypeDef* timer);
 	void start();
 	void stop();
 	void reset();
+	float get_duty();
 };
 
 

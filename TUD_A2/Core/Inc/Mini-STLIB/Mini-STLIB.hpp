@@ -105,8 +105,14 @@ Timer timer_17(&htim17);
 
 Can main_can(&hfdcan1);
 
-void read_once_callback();
-void read_stream_callback();
+void read_input_capture_callback();
+void read_analog_in_callback();
+void read_digital_in_callback();
+
+void stream_input_capture_callback();
+void strean_analog_in_callback();
+void stream_digital_in_callback();
+
 void write_once_callback();
 void set_precision_callback();
 void cancel_stream_callback();
@@ -122,11 +128,19 @@ uint8_t  set_precision_value;
 uint8_t	 cancel_stream_id;
 uint8_t  cancel_stream_offset;
 
-Packet read_stream			(READ_STREAM_ID	  , read_stream_callback		, &read_stream_pin		, &read_stream_freq);
-Packet cancel_stream		(CANCEL_STREAM_ID , cancel_stream_callback		, &cancel_stream_id		, &cancel_stream_offset);
-Packet write_once			(WRITE_ONCE_ID	  , write_once_callback			, &write_once_pin		, &write_once_value);
-Packet set_precision		(SET_PRECISION_ID , set_precision_callback		, &set_precision_value);
-Packet read_once			(READ_ONCE_ID	  , read_once_callback			, &read_once_pin);
+Packet read_input_caputre	(ID_READ_INPUT_CAPTURE	 , read_input_capture_callback, &read_once_pin);
+Packet read_analog_in		(ID_READ_ANALOG_IN	  	 , read_analog_in_callback, &read_once_pin);
+Packet read_digital_in		(ID_READ_DIGITAL_IN   	 , read_digital_in_callback, &read_once_pin);
+
+Packet stream_input_capture	(ID_STREAM_INPUT_CAPTURE , stream_input_capture_callback, &read_stream_pin, &read_stream_freq);
+Packet stream_analog_in		(ID_STREAM_ANALOG_IN	 , strean_analog_in_callback, &read_stream_pin, &read_stream_freq);
+Packet stream_digital_in	(ID_STREAM_DIGITAL_IN	 , stream_digital_in_callback, &read_stream_pin, &read_stream_freq);
+
+Packet write_analog			(ID_WRITE_ANALOG_OUT  	 , write_once_callback			, &write_once_pin		, &write_once_value);
+Packet write_digital		(ID_WRITE_DIGITAL_OUT 	 , write_once_callback	, &write_once_pin		, &write_once_value);
+
+Packet cancel_stream		(ID_CANCEL_STREAM 		 , cancel_stream_callback, &cancel_stream_id		, &cancel_stream_offset);
+Packet set_precision		(ID_SET_PRECISION 		 , set_precision_callback, &set_precision_value);
 
 Stream stream1(&timer_14, &main_can);
 Stream stream2(&timer_15, &main_can);
@@ -138,7 +152,6 @@ void start() {
 	AnalogOut::start_all_analog_outs();
 	AnalogIn::start_all_analog_ins();
 	Can::start_all_cans();
-	Stream::add_stream(1000, &PA6);
 }
 
 // INTERRUPTIONS
@@ -157,89 +170,119 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* tim){
 
 void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs)
 {
+	HAL_GPIO_TogglePin(GPIOG, GPIO_PIN_14);
 	Can::message_received_all_cans(hfdcan, RxFifo0ITs);
 }
 
 // MESSAGE CALLBACKS
 
-void read_once_callback() {
+void read_analog_in_callback(){
 	optional<Pin*> pin_optional = Pin::get_pin_from_id(read_once_pin);
 	if(pin_optional){
 		Pin* pin = pin_optional.value();
-		uint32_t size;
-		uint8_t* ptr;
-
-		if(pin->mode == ANALOG_INPUT){
-			if(AnalogIn::analog_in_from_pin.contains(pin)){
-				AnalogIn* in = AnalogIn::analog_in_from_pin[pin];
-				ptr = (uint8_t*) &in->voltage;
-				size = sizeof(float);
-			}
-		}
-
-		if(pin->mode == DIGITAL_INPUT){
-			if(DigitalIn::pin_to_digital_in.contains(pin)){
-				DigitalIn* in = DigitalIn::pin_to_digital_in[pin];
-				ptr = (uint8_t*) &in->state;
-				size = sizeof(uint8_t);
-			}
-		}
-
-		if(pin->mode == INPUT_CAPTURE){
-			if(InputCapture::pin_to_input_capture.contains(pin)){
-				InputCapture* in = InputCapture::pin_to_input_capture[pin];
-				ptr = (uint8_t*) &in->frequency;
-				size = sizeof(float) * 2;
-			}
-		}
-
-		main_can.send_message(READ_ONCE_ID, ptr, size);
+		AnalogIn* in = AnalogIn::analog_in_from_pin[pin];
+		main_can.send_message(ID_READ_ANALOG_IN_REPLY, (uint8_t*) &in->voltage, sizeof(float));
+		return;
 	}
+}
 
+void read_digital_in_callback(){
+	optional<Pin*> pin_optional = Pin::get_pin_from_id(read_once_pin);
+	if(pin_optional){
+		Pin* pin = pin_optional.value();
+		DigitalIn* in = DigitalIn::pin_to_digital_in[pin];
+		main_can.send_message(ID_READ_DIGITAL_IN_REPLY, (uint8_t*) &in->state, sizeof(uint8_t));
+		return;
+	}
+}
+
+int MSG_INDEX = 0;
+void read_input_capture_callback(){
+	MSG_INDEX += 1;
+	optional<Pin*> pin_optional = Pin::get_pin_from_id(read_once_pin);
+	if(pin_optional){
+		Pin* pin = pin_optional.value();
+		InputCapture* in = InputCapture::pin_to_input_capture[pin];
+		in->get_duty();
+		main_can.send_message(ID_READ_INPUT_CAPTURE_REPLY, (uint8_t*) &in->duty, sizeof(float));
+		return;
+	}
 }
 
 void read_stream_callback() {
-	optional<Pin*> pin = Pin::get_pin_from_id(read_stream_pin);
-	if(pin){
-		if(!Stream::add_stream(read_stream_freq, pin.value()))
-			main_can.send_error_message(READ_STREAM_ID, "ERROR: all streams are full");
+	optional<Pin*> pin_optional = Pin::get_pin_from_id(read_stream_pin);
+	if(pin_optional){
+		Pin* pin = pin_optional.value();
+		uint16_t id;
+		if(pin->mode == DIGITAL_INPUT)
+			id = ID_STREAM_DIGITAL_IN_REPLY;
+		if(pin->mode == ANALOG_INPUT)
+			id = ID_STREAM_ANALOG_IN_REPLY;
+		if(pin->mode == INPUT_CAPTURE)
+			id = ID_STREAM_INPUT_CAPTURE_REPLY;
+			main_can.send_error_message(id, "ERROR: all streams are full");
 	}
 }
+
+void stream_input_capture_callback(){
+	optional<Pin*> pin_optional = Pin::get_pin_from_id(read_stream_pin);
+	if(pin_optional){
+		Pin* pin = pin_optional.value();
+		Stream::add_stream(read_stream_freq, pin, ID_STREAM_INPUT_CAPTURE_REPLY);
+	}
+}
+
+void strean_analog_in_callback(){
+	optional<Pin*> pin_optional = Pin::get_pin_from_id(read_stream_pin);
+	if(pin_optional){
+		Pin* pin = pin_optional.value();
+		Stream::add_stream(read_stream_freq, pin, ID_STREAM_ANALOG_IN_REPLY);
+	}
+}
+
+void stream_digital_in_callback(){
+	optional<Pin*> pin_optional = Pin::get_pin_from_id(read_stream_pin);
+	if(pin_optional){
+		Pin* pin = pin_optional.value();
+		Stream::add_stream(read_stream_freq, pin, ID_STREAM_DIGITAL_IN_REPLY);
+	}
+}
+
 
 void write_once_callback(){
 	optional<Pin*> pin_optional = Pin::get_pin_from_id(write_once_pin);
 	if(pin_optional){
 		Pin* pin = pin_optional.value();
 
-		if(pin->mode == DIGITAL_OUTPUT && DigitalOut::pin_to_digital_out.contains(pin)){
+		if(pin->mode == DIGITAL_OUTPUT && DigitalOut::pin_to_digital_out.contains(pin)) {
 			DigitalOut* out = DigitalOut::pin_to_digital_out[pin];
 			out->set_to((DigitalOut::DigitalOutState) write_once_value);
+			//main_can.send_message(ID_WRITE_DIGITAL_OUT,  0);
 			return;
 		}
 
-		if(pin->mode == ANALOG_OUTPUT && AnalogOut::pin_to_analog_out.contains(pin)){
+		if(pin->mode == ANALOG_OUTPUT && AnalogOut::pin_to_analog_out.contains(pin)) {
 			AnalogOut* out = AnalogOut::pin_to_analog_out[pin];
 			out->set_voltage(*((float*) &write_once_value));
-			main_can.send_message(WRITE_ONCE_ID,  0);
+			//main_can.send_message(ID_WRITE_ANALOG_OUT,  0);
 			return;
 		}
-
 	}
 
-	main_can.send_error_message(WRITE_ONCE_ID, "ERROR: Pin not found...");
+	main_can.send_error_message(ID_INFO_MESSAGE,  "Error:output pin not found");
 }
 
 void set_precision_callback() {
 	if(StreamMessage::set_precision_mode(set_precision_value)){
 		main_can.TxData[0] = 0;
-		main_can.send_message(SET_PRECISION_ID,1);
+		main_can.send_message(ID_SET_PRECISION,1);
 		return;
 	}
-	main_can.send_error_message(SET_PRECISION_ID, "Error: cannot change precision");
+	main_can.send_error_message(ID_INFO_MESSAGE, "Error: cannot change precision");
 }
 
 void cancel_stream_callback(){
 	if(!Stream::empty(cancel_stream_id, cancel_stream_offset))
-		main_can.send_error_message(CANCEL_STREAM_ID, "Error: cannot delete message");
+		main_can.send_error_message(ID_INFO_MESSAGE, "Error: cannot delete message");
 }
 

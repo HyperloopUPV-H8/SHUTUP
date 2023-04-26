@@ -21,6 +21,7 @@ class StreamMessage{
 public:
 	static Precision precision_mode;
 	static map<Precision, unsigned long> precision_max;
+	InputCapture* ic = nullptr;
 	size_t size;
 	float min, max;
 	void* ptr;
@@ -38,6 +39,8 @@ public:
 
 	void unparse(uint8_t* d) {
 		if(do_scale){
+			if(ic != nullptr)
+				ic->get_duty();
 			float scale = (*((float*) ptr) - min) / (max - min);
 			uint32_t data = (uint32_t) (scale * precision_max[(Precision) size]);
 			memcpy(d, &data, size);
@@ -55,7 +58,9 @@ public:
 	}
 
 	static StreamMessage* FromInputCapture(InputCapture* in){
-		return new StreamMessage(&in->duty, 0, 100);
+		StreamMessage* sm = new StreamMessage(&in->duty, 0, 100);
+		sm->ic = in;
+		return sm;
 	}
 
 	static optional<StreamMessage*> FromPin(Pin* pin){
@@ -96,11 +101,11 @@ private:
 		return !is_occupied || (frequencies_match && !is_full);
 	}
 
-	void send_ok_response(uint8_t offset){
+	void send_ok_response(uint8_t offset, uint16_t response_code){
 		can->TxData[0] = Can::Ok;
 		can->TxData[1] = id;
 		can->TxData[2] = offset;
-		can->send_message(READ_STREAM_ID, 3);
+		can->send_message(response_code, 3);
 	}
 
 	bool empty(uint8_t offset){
@@ -151,30 +156,29 @@ public:
 			message->unparse(&can->TxData[current_position]);
 			current_position += message->size;
 		}
-		can->send_message(id, size);
+		can->send_message(id, this->size);
 	}
 
-	void add_message(uint32_t frequency, StreamMessage* message){
+	void add_message(uint32_t frequency, StreamMessage* message, uint16_t response_code){
 		messages.push_back(message);
 		if(state == FREE){
 			state = OCCUPIED;
 			timer->execute_at([&](){ send_all_messages(); }, frequency);
 		};
 		this -> frequency = frequency;
-		send_ok_response(size);
+		send_ok_response(size, response_code);
  		size += message->size;
 	}
 
-	static bool add_stream(unsigned int frequency, Pin* pin) {
+	static bool add_stream(unsigned int frequency, Pin* pin, uint16_t response_code) {
 		optional<StreamMessage*> message_optional = StreamMessage::FromPin(pin);
 		if(message_optional){
 			StreamMessage* message = message_optional.value();
 			for(auto s : streams){
 				if(s->is_available(frequency, message->size)){
-					s->add_message(frequency, message);
+					s->add_message(frequency, message, response_code);
 					return true;
 				}
-
 			}
 		}
 		return false;

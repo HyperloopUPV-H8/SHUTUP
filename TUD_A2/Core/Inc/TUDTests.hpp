@@ -25,7 +25,7 @@ public:
 //			for(auto analog_out : AnalogOut::all_analog_outs)
 //				analog_out->set_voltage(sin(sin_index / 1000.0 * 3.1415) * 1.65 + 1.65);
 //			sin_index ++;
-			main_can.send_ok_message();
+			//main_can.send_ok_message();
 		}, 1000, Timer::MICROSEONDS);
 
 		// GPIO IN

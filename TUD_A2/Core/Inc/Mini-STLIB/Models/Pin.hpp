@@ -8,11 +8,11 @@ using namespace std;
 
 enum PinMode {
 	NONE,
-	ANALOG_INPUT,
-	ANALOG_OUTPUT,
-	INPUT_CAPTURE,
+	ANALOG_INPUT  ,
+	INPUT_CAPTURE ,
+	DIGITAL_INPUT ,
 	DIGITAL_OUTPUT,
-	DIGITAL_INPUT,
+	ANALOG_OUTPUT ,
 };
 
 class Pin {

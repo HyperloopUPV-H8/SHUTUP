@@ -83,8 +83,6 @@ void Error_Handler(void);
 #define ACTUATOR_24V_3_GPIO_Port GPIOC
 #define ACTUATOR_24V_2_Pin GPIO_PIN_3
 #define ACTUATOR_24V_2_GPIO_Port GPIOC
-#define PWM_5V_1_Pin GPIO_PIN_1
-#define PWM_5V_1_GPIO_Port GPIOA
 #define SENSOR_3V_1A5_Pin GPIO_PIN_5
 #define SENSOR_3V_1A5_GPIO_Port GPIOA
 #define PWM_5V_2_Pin GPIO_PIN_0
