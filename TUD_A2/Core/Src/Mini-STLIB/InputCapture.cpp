@@ -50,15 +50,8 @@ void InputCapture::interrupt() {
 			duty_count 	 = absolute_difference(falling_edge, rising_edge);
 			uint32_t new_rising_edge = HAL_TIM_ReadCapturedValue(timer, channel);
 			freq_count 	 = absolute_difference(new_rising_edge, rising_edge);
-			if(freq_count > 9300){
-				int a = 0;
-			}
-
-			if(duty_count < 4200){
-				int a = 0;
-			}
-			rising_edge		= -1;
-			falling_edge	= -1;
+			rising_edge	 = -1;
+			falling_edge = -1;
 		}
 	}
 

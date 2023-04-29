@@ -11,7 +11,11 @@
 
 using namespace std;
 
-// Requests
+// High priority requests
+
+const uint16_t ID_CANCEL_STREAM					= 10;
+
+// Low priority requests
 
 const uint16_t ID_READ_INPUT_CAPTURE 			= 81;
 const uint16_t ID_READ_ANALOG_IN 				= 82;
@@ -22,7 +26,6 @@ const uint16_t ID_STREAM_DIGITAL_IN				= 86;
 const uint16_t ID_WRITE_DIGITAL_OUT				= 87;
 const uint16_t ID_WRITE_ANALOG_OUT				= 88;
 const uint16_t ID_SET_PRECISION					= 89;
-const uint16_t ID_CANCEL_STREAM					= 90;
 const uint16_t ID_INFO_MESSAGE					= 91;
 
 // Responses

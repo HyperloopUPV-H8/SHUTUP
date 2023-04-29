@@ -220,7 +220,6 @@ void read_stream_callback() {
 			id = ID_STREAM_ANALOG_IN_REPLY;
 		if(pin->mode == INPUT_CAPTURE)
 			id = ID_STREAM_INPUT_CAPTURE_REPLY;
-			main_can.send_error_message(id, "ERROR: all streams are full");
 	}
 }
 
@@ -257,19 +256,15 @@ void write_once_callback(){
 		if(pin->mode == DIGITAL_OUTPUT && DigitalOut::pin_to_digital_out.contains(pin)) {
 			DigitalOut* out = DigitalOut::pin_to_digital_out[pin];
 			out->set_to((DigitalOut::DigitalOutState) write_once_value);
-			//main_can.send_message(ID_WRITE_DIGITAL_OUT,  0);
 			return;
 		}
 
 		if(pin->mode == ANALOG_OUTPUT && AnalogOut::pin_to_analog_out.contains(pin)) {
 			AnalogOut* out = AnalogOut::pin_to_analog_out[pin];
 			out->set_voltage(*((float*) &write_once_value));
-			//main_can.send_message(ID_WRITE_ANALOG_OUT,  0);
 			return;
 		}
 	}
-
-	main_can.send_error_message(ID_INFO_MESSAGE,  "Error:output pin not found");
 }
 
 void set_precision_callback() {
@@ -282,7 +277,6 @@ void set_precision_callback() {
 }
 
 void cancel_stream_callback(){
-	if(!Stream::empty(cancel_stream_id, cancel_stream_offset))
-		main_can.send_error_message(ID_INFO_MESSAGE, "Error: cannot delete message");
+	HAL_NVIC_SystemReset();
 }
 

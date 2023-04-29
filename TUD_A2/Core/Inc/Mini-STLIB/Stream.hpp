@@ -109,36 +109,17 @@ private:
 	}
 
 	bool empty(uint8_t offset){
-		bool success = false;
 		timer->stop_interrupt();
-		uint8_t current_offset = 0;
 		size_t i = 0;
 
-		while(i < messages.size()){
-			StreamMessage* message = messages[i];
-			size_t message_size = message->size;
+		while(i < messages.size())
+			delete messages[i];
 
-			if(current_offset == offset || offset == 255){
-				messages.erase(messages.begin() + i);
-				this->size -= message_size;
-				delete message;
-				success = true;
-			}else{
-				i++;
-			}
-			current_offset += message_size;
-		}
-
-		if(this->size != 0){
-			timer->start_interrupt();
-		}else{
-			timer->reset();
-			state = FREE;
-			frequency = 0;
-			size = 0;
-		}
-
-		return success;
+		messages.clear();
+		state = FREE;
+		frequency = 0;
+		size = 0;
+		return true;
 	}
 
 public:

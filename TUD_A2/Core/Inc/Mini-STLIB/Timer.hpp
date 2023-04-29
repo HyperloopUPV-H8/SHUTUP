@@ -111,7 +111,7 @@ public:
 	}
 
 	void stop_interrupt(){
-		HAL_TIM_Base_Stop_IT(timer);
+		this->current_func = [](){ };
 	}
 
 	void start_interrupt(){
