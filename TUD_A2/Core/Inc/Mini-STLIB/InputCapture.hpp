@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Mini-STLIB/Filters/MovingAverage.hpp"
 #include "DataStructures/RingBuffer.hpp"
 #include "Filters/MovingAverage.hpp"
 #include "stm32h7xx_hal.h"
@@ -16,6 +17,7 @@ private:
 	int rising_edge = -1, falling_edge = -1;
 	int period = -1;
 	int low_time = -1;
+	MovingAverage<15, float> duty_avg, freq_avg;
 	uint32_t duty_count, freq_count;
 
 	uint32_t absolute_difference(uint32_t a, uint32_t b);

@@ -36,8 +36,8 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
  ../Core/Inc/TUDTests.hpp ../Core/Inc/Mini-STLIB/Mini-STLIB.hpp \
  ../Core/Inc/Mini-STLIB/Models/Packet.hpp \
  ../Core/Inc/Mini-STLIB/InputCapture.hpp \
- ../Core/Inc/Mini-STLIB/DataStructures/RingBuffer.hpp \
  ../Core/Inc/Mini-STLIB/Filters/MovingAverage.hpp \
+ ../Core/Inc/Mini-STLIB/DataStructures/RingBuffer.hpp \
  ../Core/Inc/Mini-STLIB/Models/Pin.hpp \
  ../Core/Inc/Mini-STLIB/DigitalOut.hpp \
  ../Core/Inc/Mini-STLIB/AnalogOut.hpp \
@@ -83,8 +83,8 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
 ../Core/Inc/Mini-STLIB/Mini-STLIB.hpp:
 ../Core/Inc/Mini-STLIB/Models/Packet.hpp:
 ../Core/Inc/Mini-STLIB/InputCapture.hpp:
-../Core/Inc/Mini-STLIB/DataStructures/RingBuffer.hpp:
 ../Core/Inc/Mini-STLIB/Filters/MovingAverage.hpp:
+../Core/Inc/Mini-STLIB/DataStructures/RingBuffer.hpp:
 ../Core/Inc/Mini-STLIB/Models/Pin.hpp:
 ../Core/Inc/Mini-STLIB/DigitalOut.hpp:
 ../Core/Inc/Mini-STLIB/AnalogOut.hpp:

@@ -1,8 +1,8 @@
 Core/Src/Mini-STLIB/InputCapture.o: \
  ../Core/Src/Mini-STLIB/InputCapture.cpp \
  ../Core/Inc/Mini-STLIB/InputCapture.hpp \
- ../Core/Inc/Mini-STLIB/DataStructures/RingBuffer.hpp \
  ../Core/Inc/Mini-STLIB/Filters/MovingAverage.hpp \
+ ../Core/Inc/Mini-STLIB/DataStructures/RingBuffer.hpp \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h \
  ../Core/Inc/stm32h7xx_hal_conf.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h \
@@ -39,8 +39,8 @@ Core/Src/Mini-STLIB/InputCapture.o: \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h \
  ../Core/Inc/Mini-STLIB/Models/Pin.hpp
 ../Core/Inc/Mini-STLIB/InputCapture.hpp:
-../Core/Inc/Mini-STLIB/DataStructures/RingBuffer.hpp:
 ../Core/Inc/Mini-STLIB/Filters/MovingAverage.hpp:
+../Core/Inc/Mini-STLIB/DataStructures/RingBuffer.hpp:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:
 ../Core/Inc/stm32h7xx_hal_conf.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h:

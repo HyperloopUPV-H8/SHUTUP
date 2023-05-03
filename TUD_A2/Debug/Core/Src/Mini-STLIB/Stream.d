@@ -38,8 +38,8 @@ Core/Src/Mini-STLIB/Stream.o: ../Core/Src/Mini-STLIB/Stream.cpp \
  ../Core/Inc/Mini-STLIB/Models/Pin.hpp \
  ../Core/Inc/Mini-STLIB/AnalogIn.hpp \
  ../Core/Inc/Mini-STLIB/InputCapture.hpp \
- ../Core/Inc/Mini-STLIB/DataStructures/RingBuffer.hpp \
  ../Core/Inc/Mini-STLIB/Filters/MovingAverage.hpp \
+ ../Core/Inc/Mini-STLIB/DataStructures/RingBuffer.hpp \
  ../Core/Inc/Mini-STLIB/DigitalIn.hpp
 ../Core/Inc/Mini-STLIB/Stream.hpp:
 ../Core/Inc/Mini-STLIB/Timer.hpp:
@@ -82,6 +82,6 @@ Core/Src/Mini-STLIB/Stream.o: ../Core/Src/Mini-STLIB/Stream.cpp \
 ../Core/Inc/Mini-STLIB/Models/Pin.hpp:
 ../Core/Inc/Mini-STLIB/AnalogIn.hpp:
 ../Core/Inc/Mini-STLIB/InputCapture.hpp:
-../Core/Inc/Mini-STLIB/DataStructures/RingBuffer.hpp:
 ../Core/Inc/Mini-STLIB/Filters/MovingAverage.hpp:
+../Core/Inc/Mini-STLIB/DataStructures/RingBuffer.hpp:
 ../Core/Inc/Mini-STLIB/DigitalIn.hpp:
