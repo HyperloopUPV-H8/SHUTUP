@@ -35,6 +35,7 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h \
  ../Core/Inc/TUDTests.hpp ../Core/Inc/Mini-STLIB/Mini-STLIB.hpp \
  ../Core/Inc/Mini-STLIB/Models/Packet.hpp \
+ ../Core/Inc/Mini-STLIB/Models/HALTimer.hpp \
  ../Core/Inc/Mini-STLIB/InputCapture.hpp \
  ../Core/Inc/Mini-STLIB/Filters/MovingAverage.hpp \
  ../Core/Inc/Mini-STLIB/DataStructures/RingBuffer.hpp \
@@ -82,6 +83,7 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
 ../Core/Inc/TUDTests.hpp:
 ../Core/Inc/Mini-STLIB/Mini-STLIB.hpp:
 ../Core/Inc/Mini-STLIB/Models/Packet.hpp:
+../Core/Inc/Mini-STLIB/Models/HALTimer.hpp:
 ../Core/Inc/Mini-STLIB/InputCapture.hpp:
 ../Core/Inc/Mini-STLIB/Filters/MovingAverage.hpp:
 ../Core/Inc/Mini-STLIB/DataStructures/RingBuffer.hpp:

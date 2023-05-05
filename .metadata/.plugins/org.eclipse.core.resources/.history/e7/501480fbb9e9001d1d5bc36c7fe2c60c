@@ -1,0 +1,13 @@
+#pragma once
+
+#include "stm32h7xx_hal.h"
+
+class HALTimer {
+public:
+	int IRQn;
+	TIM_HandleTypeDef* tim;
+	HALTimer(int IRQn, TIM_HandleTypeDef* tim): IRQn(IRQn), tim(tim) {  }
+};
+
+
+HALTimer tim

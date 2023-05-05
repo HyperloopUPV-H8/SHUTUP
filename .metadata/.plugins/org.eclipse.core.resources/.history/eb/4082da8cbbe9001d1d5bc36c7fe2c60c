@@ -1,0 +1,22 @@
+#pragma once
+
+#include "stm32h7xx_hal.h"
+
+class HALTimer {
+public:
+	IRQn_Type IRQn;
+	TIM_HandleTypeDef* tim;
+	HALTimer(TIM_HandleTypeDef* tim, IRQn_Type IRQn) : IRQn(IRQn), tim(tim) {  }
+};
+
+extern TIM_HandleTypeDef htim1;
+extern TIM_HandleTypeDef htim2;
+extern TIM_HandleTypeDef htim3;
+extern TIM_HandleTypeDef htim4;
+extern TIM_HandleTypeDef htim8;
+
+HALTimer tim1(&htim1, TIM1_TRG_COM_IRQn);
+HALTimer tim2(&htim2, TIM2_IRQn);
+HALTimer tim3(&htim3, TIM3_IRQn);
+HALTimer tim4(&htim4, TIM4_IRQn);
+HALTimer tim8(&htim8, TIM8_TRG_COM_TIM14_IRQn);

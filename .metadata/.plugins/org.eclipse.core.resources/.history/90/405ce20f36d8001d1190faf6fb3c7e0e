@@ -1,4 +1,0 @@
-#include "Mini-STLIB/Stream.hpp"
-
-vector<Stream*> Stream::streams;
-vector<StreamMessage> Stream::messages;

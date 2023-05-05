@@ -1,5 +1,0 @@
-#include "Mini-STLIB/Stream.hpp"
-
-vector<Stream*> Stream::streams;
-unsigned int StreamMessage::message_index = 0b1000000;
-int Stream::index = 0;

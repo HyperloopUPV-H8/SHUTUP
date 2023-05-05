@@ -8,6 +8,7 @@
 "./Core/Src/Mini-STLIB/Timer.o"
 "./Core/Src/Mini-STLIB/DataStructures/RingBuffer.o"
 "./Core/Src/Mini-STLIB/Filters/MovingAverage.o"
+"./Core/Src/Mini-STLIB/Models/HALTimer.o"
 "./Core/Src/Mini-STLIB/Models/Packet.o"
 "./Core/Src/Mini-STLIB/Models/Pin.o"
 "./Core/Src/main.o"

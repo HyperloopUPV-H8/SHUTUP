@@ -1,0 +1,18 @@
+!SESSION 2023-04-29 22:30:25.260 -----------------------------------------------
+eclipse.buildId=Version 1.9.0
+java.version=11.0.11
+java.vendor=AdoptOpenJDK
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_ES
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2023-04-29 22:34:24.551
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2023-04-29 22:34:24.662
+!MESSAGE Log4j initialized with config file C:\Users\Hyperloop UPV\FSR\SHUTUP\TestServer\.metadata\.log4j.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2023-04-29 22:34:32.948
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2023-04-29 22:36:00.586
+!MESSAGE Indexed 'TUD_A2' (39 sources, 350 headers) in 25,5 sec: 50.932 declarations; 181.753 references; 3 unresolved inclusions; 358 syntax errors; 1.853 unresolved names (0,79 %)

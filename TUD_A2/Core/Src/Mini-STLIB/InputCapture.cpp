@@ -29,36 +29,15 @@ bool InputCapture::channel_is_active(){
 	return false;
 }
 
-uint32_t INDEX = 0;
 void InputCapture::interrupt() {
-
-	if(channel_is_active()){
-		GPIO_PinState state = HAL_GPIO_ReadPin(pin->port, pin->pin);
-
-		// Capture first rising edge
-		if(rising_edge == -1 && falling_edge == -1 && state ==  GPIO_PIN_SET){
-			rising_edge = HAL_TIM_ReadCapturedValue(timer, channel);
-			return;
+	if(timer->Channel == HAL_TIM_ACTIVE_CHANNEL_1){
+		freq_count = HAL_TIM_ReadCapturedValue(timer, TIM_CHANNEL_1);
+		if(freq_count != 0){
+			duty_count = HAL_TIM_ReadCapturedValue(timer, TIM_CHANNEL_2);
+			duty = ((double) duty_count) / freq_count * 100;
 		}
 
-		// Capture falling edge
-		if(rising_edge != -1 && falling_edge == -1 && state ==  GPIO_PIN_RESET){
-			falling_edge = HAL_TIM_ReadCapturedValue(timer, channel);
-			return;
-		}
-
-		// Capture second rising edge
-		if(rising_edge != -1 && falling_edge != -1 && state ==  GPIO_PIN_SET){
-			duty_count 	 = absolute_difference(falling_edge, rising_edge);
-			uint32_t new_rising_edge = HAL_TIM_ReadCapturedValue(timer, channel);
-			freq_count 	 = absolute_difference(new_rising_edge, rising_edge);
-			duty_count = INDEX;
-			rising_edge	 = -1;
-			falling_edge = -1;
-			INDEX ++;
-		}
 	}
-
 }
 
 void InputCapture::start_all_input_captures(){
@@ -74,22 +53,17 @@ void InputCapture::interrupt_of_all_input_captures(TIM_HandleTypeDef* timer){
 }
 
 void InputCapture::reset(){
-	duty_count = 0;
-	freq_count = 0;
-	duty = 0;
 }
 
 void InputCapture::start(){
-	HAL_TIM_IC_Start_IT(timer, channel);
+	HAL_TIM_IC_Start_IT(timer, TIM_CHANNEL_1);
+	HAL_TIM_IC_Start(timer, TIM_CHANNEL_2);
 }
 
 void InputCapture::stop(){
-	HAL_TIM_IC_Stop_IT(timer, channel);
 }
 
-float DUTY = 0.0;
 float InputCapture::get_duty(){
-	duty = (float) (duty_count) / 13800 * 100;
 	return duty;
 }
 

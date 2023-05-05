@@ -22,6 +22,7 @@ extern ADC_HandleTypeDef hadc1;
 extern FDCAN_HandleTypeDef hfdcan1;
 
 #include "Models/Packet.hpp"
+#include "Models/HALTimer.hpp"
 #include "InputCapture.hpp"
 #include "DigitalOut.hpp"
 #include "AnalogOut.hpp"
@@ -39,23 +40,11 @@ uint16_t data_adc_1[16];
 
 // INPUTS
 
-InputCapture ic_PA1	(&htim2, TIM_CHANNEL_2, &PA1);
-InputCapture ic_PA5	(&htim2, TIM_CHANNEL_1, &PA5);
-InputCapture ic_PB0	(&htim3, TIM_CHANNEL_3, &PB0);
-InputCapture ic_PB1	(&htim3, TIM_CHANNEL_4, &PB1);
-InputCapture ic_PB4	(&htim3, TIM_CHANNEL_1, &PB4);
-InputCapture ic_PB5	(&htim3, TIM_CHANNEL_2, &PB5);
-InputCapture ic_PB10(&htim2, TIM_CHANNEL_3, &PB10);
-InputCapture ic_PB11(&htim2, TIM_CHANNEL_4, &PB11);
-InputCapture ic_PC6	(&htim8, TIM_CHANNEL_1, &PC6);
+//InputCapture ic_PE9	(&htim1, TIM_CHANNEL_1,	&PE9);
+//InputCapture ic_PA5	(&htim2, TIM_CHANNEL_1, &PA5);
+//InputCapture ic_PB4	(&htim3, TIM_CHANNEL_1, &PB4);
 InputCapture ic_PD12(&htim4, TIM_CHANNEL_1, &PD12);
-InputCapture ic_PD13(&htim4, TIM_CHANNEL_2, &PD13);
-InputCapture ic_PD14(&htim4, TIM_CHANNEL_3, &PD14);
-InputCapture ic_PD15(&htim4, TIM_CHANNEL_4, &PD15);
-InputCapture ic_PE9	(&htim1, TIM_CHANNEL_1,	&PE9);
-InputCapture ic_PE11(&htim1, TIM_CHANNEL_2,	&PE11);
-InputCapture ic_PE13(&htim1, TIM_CHANNEL_3, &PE13);
-InputCapture ic_PE14(&htim1, TIM_CHANNEL_4, &PE14);
+
 
 DigitalIn digital_in_PC1(&PC1);
 DigitalIn digital_in_PC2(&PC2);

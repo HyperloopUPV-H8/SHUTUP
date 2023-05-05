@@ -1,0 +1,25 @@
+type_traits:3291:3:constexpr bool std::is_constant_evaluated()	1
+stl_vector.h:128:14:constexpr std::_Vector_base<Timer*, std::allocator<Timer*> >::_Vector_impl::~_Vector_impl()	1
+stl_vector.h:288:7:std::_Vector_base<_Tp, _Alloc>::_Vector_base() [with _Tp = Timer*; _Alloc = std::allocator<Timer*>]	1
+stl_vector.h:487:7:std::vector<_Tp, _Alloc>::vector() [with _Tp = Timer*; _Alloc = std::allocator<Timer*>]	1
+stl_vector.h:131:2:std::_Vector_base<_Tp, _Alloc>::_Vector_impl::_Vector_impl() [with _Tp = Timer*; _Alloc = std::allocator<Timer*>]	1
+allocator.h:182:7:constexpr std::allocator< <template-parameter-1-1> >::~allocator() [with _Tp = Timer*]	1
+stl_vector.h:333:7:std::_Vector_base<_Tp, _Alloc>::~_Vector_base() [with _Tp = Timer*; _Alloc = std::allocator<Timer*>]	1
+allocator.h:164:7:constexpr std::allocator< <template-parameter-1-1> >::allocator() [with _Tp = Timer*]	1
+stl_vector.h:97:2:std::_Vector_base<_Tp, _Alloc>::_Vector_impl_data::_Vector_impl_data() [with _Tp = Timer*; _Alloc = std::allocator<Timer*>]	1
+stl_vector.h:350:7:void std::_Vector_base<_Tp, _Alloc>::_M_deallocate(std::_Vector_base<_Tp, _Alloc>::pointer, std::size_t) [with _Tp = Timer*; _Alloc = std::allocator<Timer*>]	2
+new_allocator.h:79:7:constexpr __gnu_cxx::new_allocator<_Tp>::new_allocator() [with _Tp = Timer*]	1
+alloc_traits.h:491:7:static constexpr void std::allocator_traits<std::allocator<_Up> >::deallocate(std::allocator_traits<std::allocator<_Up> >::allocator_type&, std::allocator_traits<std::allocator<_Up> >::pointer, std::allocator_traits<std::allocator<_Up> >::size_type) [with _Tp = Timer*]	2
+stl_vector.h:276:7:std::_Vector_base<_Tp, _Alloc>::_Tp_alloc_type& std::_Vector_base<_Tp, _Alloc>::_M_get_Tp_allocator() [with _Tp = Timer*; _Alloc = std::allocator<Timer*>]	1
+alloc_traits.h:735:5:void std::_Destroy(_ForwardIterator, _ForwardIterator, std::allocator<_T2>&) [with _ForwardIterator = Timer**; _Tp = Timer*]	1
+stl_construct.h:80:5:constexpr void std::destroy_at(_Tp*) [with _Tp = Timer*]	1
+stl_construct.h:171:5:constexpr void std::_Destroy(_ForwardIterator, _ForwardIterator) [with _ForwardIterator = Timer**]	2
+new_allocator.h:126:7:void __gnu_cxx::new_allocator<_Tp>::deallocate(_Tp*, __gnu_cxx::new_allocator<_Tp>::size_type) [with _Tp = Timer*]	1
+stl_construct.h:149:2:static constexpr void std::_Destroy_aux<<anonymous> >::__destroy(_ForwardIterator, _ForwardIterator) [with _ForwardIterator = Timer**; bool <anonymous> = false]	2
+stl_construct.h:161:9:static void std::_Destroy_aux<true>::__destroy(_ForwardIterator, _ForwardIterator) [with _ForwardIterator = Timer**]	1
+move.h:49:5:constexpr _Tp* std::__addressof(_Tp&) [with _Tp = Timer*]	1
+stl_construct.h:135:5:constexpr void std::_Destroy(_Tp*) [with _Tp = Timer*]	1
+Timer.cpp:3:33:void __static_initialization_and_destruction_0(int, int)	5
+stl_vector.h:678:7:std::vector<_Tp, _Alloc>::~vector() [with _Tp = Timer*; _Alloc = std::allocator<Timer*>]	1
+Timer.cpp:3:33:cpp)	1
+Timer.cpp:3:33:cpp)	1
