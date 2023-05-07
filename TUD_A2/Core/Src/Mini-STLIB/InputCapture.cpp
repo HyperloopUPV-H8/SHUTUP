@@ -30,13 +30,15 @@ bool InputCapture::channel_is_active(){
 }
 
 void InputCapture::interrupt() {
+	has_interrupted = true;
+
 	if(timer->Channel == HAL_TIM_ACTIVE_CHANNEL_1){
 		freq_count = HAL_TIM_ReadCapturedValue(timer, TIM_CHANNEL_1);
-		if(freq_count != 0){
+		if(freq_count > 10){
 			duty_count = HAL_TIM_ReadCapturedValue(timer, TIM_CHANNEL_2);
 			duty = ((double) duty_count) / freq_count * 100;
-		}
 
+		}
 	}
 }
 
@@ -64,6 +66,9 @@ void InputCapture::stop(){
 }
 
 float InputCapture::get_duty(){
+	if(! has_interrupted)
+		duty = 0;
+	has_interrupted = false;
 	return duty;
 }
 

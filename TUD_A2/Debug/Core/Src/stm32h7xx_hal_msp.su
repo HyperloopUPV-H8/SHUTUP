@@ -4,5 +4,5 @@
 ../Core/Src/stm32h7xx_hal_msp.c:187:6:HAL_FDCAN_MspInit	48	static
 ../Core/Src/stm32h7xx_hal_msp.c:228:6:HAL_FDCAN_MspDeInit	16	static
 ../Core/Src/stm32h7xx_hal_msp.c:260:6:HAL_TIM_Base_MspInit	120	static
-../Core/Src/stm32h7xx_hal_msp.c:560:6:HAL_TIM_MspPostInit	56	static
-../Core/Src/stm32h7xx_hal_msp.c:693:6:HAL_TIM_Base_MspDeInit	16	static
+../Core/Src/stm32h7xx_hal_msp.c:545:6:HAL_TIM_MspPostInit	56	static
+../Core/Src/stm32h7xx_hal_msp.c:678:6:HAL_TIM_Base_MspDeInit	16	static

@@ -32,6 +32,7 @@ CPP_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
+Core/Src/DataStructures \
 Core/Src/Mini-STLIB \
 Core/Src/Mini-STLIB/DataStructures \
 Core/Src/Mini-STLIB/Filters \

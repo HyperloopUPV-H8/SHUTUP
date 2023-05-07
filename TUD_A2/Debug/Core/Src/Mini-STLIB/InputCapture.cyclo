@@ -17,12 +17,12 @@ stl_iterator.h:1056:7:constexpr const _Iterator& __gnu_cxx::__normal_iterator<_I
 stl_iterator.h:1073:5:constexpr bool __gnu_cxx::operator==(const __gnu_cxx::__normal_iterator<_IteratorL, _Container>&, const __gnu_cxx::__normal_iterator<_IteratorR, _Container>&) [with _IteratorL = InputCapture**; _IteratorR = InputCapture**; _Container = std::vector<InputCapture*>]	1
 stl_iterator.h:1003:7:constexpr __gnu_cxx::__normal_iterator<_Iterator, _Container>& __gnu_cxx::__normal_iterator<_Iterator, _Container>::operator++() [with _Iterator = InputCapture**; _Container = std::vector<InputCapture*>]	1
 stl_iterator.h:993:7:constexpr __gnu_cxx::__normal_iterator<_Iterator, _Container>::reference __gnu_cxx::__normal_iterator<_Iterator, _Container>::operator*() const [with _Iterator = InputCapture**; _Container = std::vector<InputCapture*>]	1
-InputCapture.cpp:43:6:static void InputCapture::start_all_input_captures()	2
-InputCapture.cpp:48:6:static void InputCapture::interrupt_of_all_input_captures(TIM_HandleTypeDef*)	3
-InputCapture.cpp:55:6:void InputCapture::reset()	1
-InputCapture.cpp:58:6:void InputCapture::start()	1
-InputCapture.cpp:63:6:void InputCapture::stop()	1
-InputCapture.cpp:66:7:float InputCapture::get_duty()	1
+InputCapture.cpp:45:6:static void InputCapture::start_all_input_captures()	2
+InputCapture.cpp:50:6:static void InputCapture::interrupt_of_all_input_captures(TIM_HandleTypeDef*)	3
+InputCapture.cpp:57:6:void InputCapture::reset()	1
+InputCapture.cpp:60:6:void InputCapture::start()	1
+InputCapture.cpp:65:6:void InputCapture::stop()	1
+InputCapture.cpp:68:7:float InputCapture::get_duty()	2
 stl_vector.h:131:2:std::_Vector_base<_Tp, _Alloc>::_Vector_impl::_Vector_impl() [with _Tp = InputCapture*; _Alloc = std::allocator<InputCapture*>]	1
 allocator.h:182:7:constexpr std::allocator< <template-parameter-1-1> >::~allocator() [with _Tp = InputCapture*]	1
 stl_vector.h:333:7:std::_Vector_base<_Tp, _Alloc>::~_Vector_base() [with _Tp = InputCapture*; _Alloc = std::allocator<InputCapture*>]	1
@@ -153,7 +153,7 @@ new_allocator.h:191:7:constexpr __gnu_cxx::new_allocator<_Tp>::size_type __gnu_c
 tuple:166:7:static constexpr _Head& std::_Head_base<_Idx, _Head, false>::_M_head(std::_Head_base<_Idx, _Head, false>&) [with unsigned int _Idx = 0; _Head = Pin* const&]	1
 tuple:1287:5:>&) [with unsigned int __i = 0; _Head = Pin* const&; _Tail = {}]	1
 stl_map.h:302:7:std::map<_Key, _Tp, _Compare, _Alloc>::~map() [with _Key = Pin*; _Tp = InputCapture*; _Compare = std::less<Pin*>; _Alloc = std::allocator<std::pair<Pin* const, InputCapture*> >]	1
-InputCapture.cpp:68:1:void __static_initialization_and_destruction_0(int, int)	5
+InputCapture.cpp:73:1:void __static_initialization_and_destruction_0(int, int)	5
 stl_vector.h:678:7:std::vector<_Tp, _Alloc>::~vector() [with _Tp = InputCapture*; _Alloc = std::allocator<InputCapture*>]	1
-InputCapture.cpp:68:1:cpp)	1
-InputCapture.cpp:68:1:cpp)	1
+InputCapture.cpp:73:1:cpp)	1
+InputCapture.cpp:73:1:cpp)	1

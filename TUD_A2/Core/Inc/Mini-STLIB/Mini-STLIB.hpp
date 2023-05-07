@@ -42,7 +42,7 @@ uint16_t data_adc_1[16];
 
 //InputCapture ic_PE9	(&htim1, TIM_CHANNEL_1,	&PE9);
 //InputCapture ic_PA5	(&htim2, TIM_CHANNEL_1, &PA5);
-//InputCapture ic_PB4	(&htim3, TIM_CHANNEL_1, &PB4);
+InputCapture ic_PB4	(&htim3, TIM_CHANNEL_1, &PB4);
 InputCapture ic_PD12(&htim4, TIM_CHANNEL_1, &PD12);
 
 
@@ -144,7 +144,6 @@ void start() {
 }
 
 // INTERRUPTIONS
-
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef* timer){
 	InputCapture::interrupt_of_all_input_captures(timer);
 }

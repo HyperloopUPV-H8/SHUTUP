@@ -1,3 +1,4 @@
+"./Core/Src/DataStructures/RingBuffer.o"
 "./Core/Src/Mini-STLIB/AnalogIn.o"
 "./Core/Src/Mini-STLIB/AnalogOut.o"
 "./Core/Src/Mini-STLIB/Can.o"

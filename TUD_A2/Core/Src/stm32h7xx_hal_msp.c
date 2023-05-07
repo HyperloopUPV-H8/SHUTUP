@@ -271,13 +271,10 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* htim_base)
     __HAL_RCC_GPIOE_CLK_ENABLE();
     /**TIM1 GPIO Configuration
     PE9     ------> TIM1_CH1
-    PE11     ------> TIM1_CH2
-    PE13     ------> TIM1_CH3
-    PE14     ------> TIM1_CH4
     */
-    GPIO_InitStruct.Pin = GPIO_PIN_9|GPIO_PIN_11|PWM_5V_8_Pin|PWM_5V_7_Pin;
+    GPIO_InitStruct.Pin = GPIO_PIN_9;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-    GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     GPIO_InitStruct.Alternate = GPIO_AF1_TIM1;
     HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
@@ -300,18 +297,10 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* htim_base)
     __HAL_RCC_GPIOA_CLK_ENABLE();
     __HAL_RCC_GPIOB_CLK_ENABLE();
     /**TIM2 GPIO Configuration
-    PA1     ------> TIM2_CH2
     PA5     ------> TIM2_CH1
     PB10     ------> TIM2_CH3
     PB11     ------> TIM2_CH4
     */
-    GPIO_InitStruct.Pin = GPIO_PIN_1;
-    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-    GPIO_InitStruct.Alternate = GPIO_AF1_TIM2;
-    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
     GPIO_InitStruct.Pin = SENSOR_3V_1A5_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_PULLDOWN;
@@ -343,12 +332,9 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* htim_base)
 
     __HAL_RCC_GPIOB_CLK_ENABLE();
     /**TIM3 GPIO Configuration
-    PB0     ------> TIM3_CH3
-    PB1     ------> TIM3_CH4
     PB4(NJTRST)     ------> TIM3_CH1
-    PB5     ------> TIM3_CH2
     */
-    GPIO_InitStruct.Pin = PWM_5V_2_Pin|PWM_5V_9_Pin|GPIO_PIN_4|PWM_5V_4_Pin;
+    GPIO_InitStruct.Pin = GPIO_PIN_4;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_PULLDOWN;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -373,11 +359,10 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* htim_base)
     __HAL_RCC_GPIOD_CLK_ENABLE();
     /**TIM4 GPIO Configuration
     PD12     ------> TIM4_CH1
-    PD13     ------> TIM4_CH2
     PD14     ------> TIM4_CH3
     PD15     ------> TIM4_CH4
     */
-    GPIO_InitStruct.Pin = PWM_5V_6_Pin|PWM_5V_5_Pin|PWM_5V_10_Pin|PWM_5V_11_Pin;
+    GPIO_InitStruct.Pin = PWM_5V_6_Pin|PWM_5V_10_Pin|PWM_5V_11_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -702,11 +687,8 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* htim_base)
 
     /**TIM1 GPIO Configuration
     PE9     ------> TIM1_CH1
-    PE11     ------> TIM1_CH2
-    PE13     ------> TIM1_CH3
-    PE14     ------> TIM1_CH4
     */
-    HAL_GPIO_DeInit(GPIOE, GPIO_PIN_9|GPIO_PIN_11|PWM_5V_8_Pin|PWM_5V_7_Pin);
+    HAL_GPIO_DeInit(GPIOE, GPIO_PIN_9);
 
     /* TIM1 interrupt DeInit */
     HAL_NVIC_DisableIRQ(TIM1_CC_IRQn);
@@ -723,12 +705,11 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* htim_base)
     __HAL_RCC_TIM2_CLK_DISABLE();
 
     /**TIM2 GPIO Configuration
-    PA1     ------> TIM2_CH2
     PA5     ------> TIM2_CH1
     PB10     ------> TIM2_CH3
     PB11     ------> TIM2_CH4
     */
-    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_1|SENSOR_3V_1A5_Pin);
+    HAL_GPIO_DeInit(SENSOR_3V_1A5_GPIO_Port, SENSOR_3V_1A5_Pin);
 
     HAL_GPIO_DeInit(GPIOB, SENSOR_3V_5_Pin|SENSOR_3V_8_Pin);
 
@@ -747,12 +728,9 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* htim_base)
     __HAL_RCC_TIM3_CLK_DISABLE();
 
     /**TIM3 GPIO Configuration
-    PB0     ------> TIM3_CH3
-    PB1     ------> TIM3_CH4
     PB4(NJTRST)     ------> TIM3_CH1
-    PB5     ------> TIM3_CH2
     */
-    HAL_GPIO_DeInit(GPIOB, PWM_5V_2_Pin|PWM_5V_9_Pin|GPIO_PIN_4|PWM_5V_4_Pin);
+    HAL_GPIO_DeInit(GPIOB, GPIO_PIN_4);
 
     /* TIM3 interrupt DeInit */
     HAL_NVIC_DisableIRQ(TIM3_IRQn);
@@ -770,11 +748,10 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* htim_base)
 
     /**TIM4 GPIO Configuration
     PD12     ------> TIM4_CH1
-    PD13     ------> TIM4_CH2
     PD14     ------> TIM4_CH3
     PD15     ------> TIM4_CH4
     */
-    HAL_GPIO_DeInit(GPIOD, PWM_5V_6_Pin|PWM_5V_5_Pin|PWM_5V_10_Pin|PWM_5V_11_Pin);
+    HAL_GPIO_DeInit(GPIOD, PWM_5V_6_Pin|PWM_5V_10_Pin|PWM_5V_11_Pin);
 
     /* TIM4 interrupt DeInit */
     HAL_NVIC_DisableIRQ(TIM4_IRQn);
