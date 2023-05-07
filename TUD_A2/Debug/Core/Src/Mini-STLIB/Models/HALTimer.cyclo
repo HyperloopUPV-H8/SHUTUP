@@ -1,3 +1,0 @@
-HALTimer.hpp:9:2:HALTimer::HALTimer(TIM_HandleTypeDef*, IRQn_Type)	1
-HALTimer.cpp:7:48:void __static_initialization_and_destruction_0(int, int)	3
-HALTimer.cpp:7:48:cpp)	1
