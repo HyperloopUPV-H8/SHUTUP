@@ -135,8 +135,6 @@ void Error_Handler(void);
 #define DUT_PWM_8_GPIO_Port GPIOD
 #define DUT_PWM_9_Pin GPIO_PIN_15
 #define DUT_PWM_9_GPIO_Port GPIOD
-#define SENSOR_5V_5_Pin GPIO_PIN_6
-#define SENSOR_5V_5_GPIO_Port GPIOC
 #define SENSOR_5V_2_Pin GPIO_PIN_7
 #define SENSOR_5V_2_GPIO_Port GPIOC
 #define SENSOR_5V_4_Pin GPIO_PIN_8

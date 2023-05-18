@@ -1,5 +1,18 @@
 #pragma once
 
+#include "Models/Packet.hpp"
+#include "Models/HALTimer.hpp"
+#include "InputCapture.hpp"
+#include "DigitalOut.hpp"
+#include "AnalogOut.hpp"
+#include "DigitalIn.hpp"
+#include "AnalogIn.hpp"
+#include "Stream.hpp"
+#include "Timer.hpp"
+#include "Can.hpp"
+#include <string>
+#include <vector>
+
 // TODO -> Rework all library, layers are too coupled
 
 extern TIM_HandleTypeDef htim1;
@@ -20,19 +33,6 @@ extern TIM_HandleTypeDef htim23;
 extern TIM_HandleTypeDef htim24;
 extern ADC_HandleTypeDef hadc1;
 extern FDCAN_HandleTypeDef hfdcan1;
-
-#include "Models/Packet.hpp"
-#include "Models/HALTimer.hpp"
-#include "InputCapture.hpp"
-#include "DigitalOut.hpp"
-#include "AnalogOut.hpp"
-#include "DigitalIn.hpp"
-#include "AnalogIn.hpp"
-#include "Stream.hpp"
-#include "Timer.hpp"
-#include "Can.hpp"
-#include <string>
-#include <vector>
 
 using namespace std;
 

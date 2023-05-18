@@ -17,11 +17,11 @@
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
+#include <TUDA.hpp>
 #include "main.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "TUDTests.hpp"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -148,7 +148,7 @@ int main(void)
   MX_TIM17_Init();
   /* USER CODE BEGIN 2 */
 
-  TUDTests::setup();
+  TUD_A::setup();
 
   HAL_TIM_IC_Start_IT(&htim4, TIM_CHANNEL_1);   // main channel
   HAL_TIM_IC_Start(&htim4, TIM_CHANNEL_2);   // indirect channel
@@ -161,7 +161,7 @@ int main(void)
   while (1)
   {
 
-		TUDTests::loop();
+		TUD_A::loop();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
