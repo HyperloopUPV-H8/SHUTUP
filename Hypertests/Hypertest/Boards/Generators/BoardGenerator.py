@@ -117,9 +117,9 @@ class """ + board_name +""":
         self.port_tcp   = port_tcp
         self.port_udp   = port_udp
         self.is_slave   = is_slave
-        print("[LCU]        -> Waiting for connection")
+        print("["+"""+board_name+"""+"]        -> Waiting for connection")
         self.start_connection()
-        print("[LCU]        -> Connection stablished")
+        print("["+"""+board_name+"""+"]        -> Connection stablished")
 
     def start_connection(self):
         if not self.is_slave:
@@ -164,7 +164,7 @@ class """ + board_name +""":
         self.socket_tcp.shutdown(SHUT_RDWR)
         self.socket_tcp.close()
         self.socket_udp.close()
-        print("[LCU]        -> Shutting down connections")
+        print("["+"""+board_name+"""+"]        -> Shutting down connections")
     """ + orders + """
     def close(self):
         self.running = False
